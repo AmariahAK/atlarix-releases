@@ -10,7 +10,7 @@ This is the **official release repository** for [Atlarix](https://atlarix.dev) â
 ## What this repo is for
 
 - **Download centre:** The [Atlarix website](https://atlarix.dev) uses this repo as the source for the latest installers and release notes.
-- **Releases:** Official binaries (macOS, Windows, Linux) are published here via GitHub Actions from the main Atlarix app repository.
+- **Releases:** Official binaries (macOS, Linux) are published here via GitHub Actions from the main Atlarix app repository. *Windows builds are temporarily not published while EV/OV code signing is in progress; the Windows version is in development.*
 - **Community:** You can open **Issues** for bug reports and **Discussions** (if enabled) for ideas and feedback.
 
 ## Links
