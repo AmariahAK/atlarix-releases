@@ -22,4 +22,16 @@ This is the **official release repository** for [Atlarix](https://atlarix.dev) �
 
 ---
 
+## Contributing
+
+Atlarix is closed-source, but you can contribute to the ecosystem:
+
+**Skills Registry** — Atlarix ships with a community-maintained open-source skill registry. If you build a skill that makes Atlarix better at a language, framework, or workflow pattern, contribute it at:
+
+👉 **[github.com/AmariahAK/atlarix-skills](https://github.com/AmariahAK/atlarix-skills)**
+
+Skills are Apache 2.0 licensed and show up in the Skills Marketplace inside the app.
+
+---
+
 *Atlas + Axis + Intelligence*
