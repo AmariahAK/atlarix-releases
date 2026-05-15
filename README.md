@@ -30,7 +30,11 @@ Atlarix is closed-source, but you can contribute to the ecosystem:
 
 👉 **[github.com/AmariahAK/atlarix-skills](https://github.com/AmariahAK/atlarix-skills)**
 
-Skills are Apache 2.0 licensed and show up in the Skills Marketplace inside the app.
+**MCP registry** — Curated Model Context Protocol listings for the Atlarix marketplace:
+
+👉 **[github.com/AmariahAK/atlarix-mcps](https://github.com/AmariahAK/atlarix-mcps)**
+
+The desktop app repository (not open source) lives at **[github.com/AmariahAK/Atlarix](https://github.com/AmariahAK/Atlarix)** and publishes installers here via automation.
 
 ---
 
