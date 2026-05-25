@@ -20,6 +20,17 @@ This is the **official release repository** for [Atlarix](https://atlarix.dev) �
 - [Security policy](SECURITY.md) — how to report vulnerabilities  
 - [License](LICENSE) — end-user license agreement  
 
+## Research
+
+A technical paper documenting Atlarix's Blueprint context management system has been published on Zenodo:
+
+**Blueprint: Section-Scoped Structural Graph Retrieval and Post-Turn Compression for Agentic LLM Coding in Multi-Repository Workspaces**  
+Amariah Kamau — May 2026  
+DOI: [10.5281/zenodo.20381860](https://doi.org/10.5281/zenodo.20381860)  
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20381860.svg)](https://doi.org/10.5281/zenodo.20381860)
+
+If you are evaluating Atlarix for a large or multi-repository codebase, this paper documents the technical evidence behind the Blueprint system.
+
 ---
 
 ## Contributing
