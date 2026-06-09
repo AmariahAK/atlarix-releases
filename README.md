@@ -13,6 +13,21 @@ This is the **official release repository** for [Atlarix](https://atlarix.dev) �
 - **Releases:** Official binaries (macOS, Linux) are published here via GitHub Actions from the main Atlarix app repository. *Windows builds are temporarily not published while EV/OV code signing is in progress; the Windows version is in development.*
 - **Community:** You can open **Issues** for bug reports and **Discussions** (if enabled) for ideas and feedback.
 
+## Atlarix Core models
+
+[`core-models.json`](core-models.json) is the live mapping of the four **Atlarix Core** tiers to the underlying models they run on. The desktop app reads this file at startup (and hourly), so the Core models can be updated here **without shipping a new app release**.
+
+The models currently powering Atlarix Core:
+
+| Tier | Model |
+| --- | --- |
+| Core 1 | `google/gemma-4-31b-it` |
+| Core 2 | `qwen/qwen3.7-plus` |
+| Core 3 | `deepseek/deepseek-v4-pro` |
+| Core 4 | `minimax/minimax-m3` |
+
+This table reflects the values in `core-models.json` — if that file changes, the models above change with it. (No API keys live here; only model identifiers.)
+
 ## Links
 
 - [Atlarix](https://atlarix.dev) — product and download page  
