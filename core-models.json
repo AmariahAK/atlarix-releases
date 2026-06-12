@@ -1,7 +1,7 @@
 {
   "version": 1,
   "models": {
-    "core-1": "google/gemma-4-31b-it",
+    "core-1": "moonshotai/kimi-k2.6",
     "core-2": "qwen/qwen3.7-plus",
     "core-3": "deepseek/deepseek-v4-pro",
     "core-4": "minimax/minimax-m3"
