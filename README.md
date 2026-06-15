@@ -21,7 +21,7 @@ The models currently powering Atlarix Core:
 
 | Tier | Model |
 | --- | --- |
-| Core 1 | `moonshotai/kimi-k2.6` |
+| Core 1 | `moonshotai/kimi-k2.7-code` |
 | Core 2 | `qwen/qwen3.7-plus` |
 | Core 3 | `deepseek/deepseek-v4-pro` |
 | Core 4 | `minimax/minimax-m3` |
