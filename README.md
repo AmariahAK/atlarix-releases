@@ -1,6 +1,6 @@
 # Atlarix Releases
 
-This is the **official release repository** for [Atlarix](https://atlarix.dev) — your premium AI coding copilot for deep web research, code generation, and debugging.
+This is the **official release repository** for [Atlarix](https://atlarix.dev) — the open-weight frontier harness. Atlarix is the agent workstation built for the open-weight frontier labs (DeepSeek, Qwen, Kimi, MiniMax) — deep research, code generation, and debugging with any-model BYOK and local-first execution.
 
 **Main website:** [atlarix.dev](https://atlarix.dev)  
 **Built by:** [Norah Labs](https://norahlabs.com/)
@@ -10,7 +10,7 @@ This is the **official release repository** for [Atlarix](https://atlarix.dev) �
 ## What this repo is for
 
 - **Download centre:** The [Atlarix website](https://atlarix.dev) uses this repo as the source for the latest installers and release notes.
-- **Releases:** Official binaries (macOS, Linux) are published here via GitHub Actions from the main Atlarix app repository. *Windows builds are temporarily not published while EV/OV code signing is in progress; the Windows version is in development.*
+- **Releases:** Official binaries (macOS, Linux, **Windows**) are published here via GitHub Actions from the main Atlarix app repository. *Windows builds are currently **unsigned** (EV/OV code signing is in progress) — Windows Defender SmartScreen will show a warning before install; this is expected. Click "More info" → "Run anyway" to proceed.*
 - **Community:** You can open **Issues** for bug reports and **Discussions** (if enabled) for ideas and feedback.
 
 ## Atlarix Core models
@@ -21,7 +21,7 @@ The models currently powering Atlarix Core:
 
 | Tier | Model |
 | --- | --- |
-| Core 1 | `google/gemma-4-31b-it` |
+| Core 1 | `moonshotai/kimi-k2.6` |
 | Core 2 | `qwen/qwen3.7-plus` |
 | Core 3 | `deepseek/deepseek-v4-pro` |
 | Core 4 | `minimax/minimax-m3` |
