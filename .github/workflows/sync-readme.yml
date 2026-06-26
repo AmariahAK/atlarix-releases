@@ -1,0 +1,45 @@
+name: Sync README Core models
+
+# Keep the README "Atlarix Core models" table in sync with core-models.json.
+# core-models.json is the single source of truth; edit only the JSON.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "core-models.json"
+      - "scripts/gen-readme-models.mjs"
+      - ".github/workflows/sync-readme.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-readme
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Regenerate README table from core-models.json
+        run: node scripts/gen-readme-models.mjs
+
+      - name: Commit if changed
+        run: |
+          if [[ -n "$(git status --porcelain README.md)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add README.md
+            git commit -m "chore: sync Core models table from core-models.json [skip ci]"
+            git push
+          else
+            echo "README.md already in sync."
+          fi
