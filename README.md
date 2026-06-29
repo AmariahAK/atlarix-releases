@@ -90,7 +90,7 @@ DOI: [10.5281/zenodo.20381860](https://doi.org/10.5281/zenodo.20381860)
 
 If you are evaluating Atlarix for a large or multi-repository codebase, this paper documents the technical evidence behind the Blueprint system.
 
-**Benchmarks (preliminary):** As a first self-run, controlled test on [Terminal-Bench 2.0](https://www.tbench.ai/leaderboard/terminal-bench/2.0) (89 tasks, MiniMax-M3, same model + provider + infrastructure, single-attempt), Atlarix resolved 42/89 to [opencode](https://github.com/sst/opencode)'s 39/89 — competitive, but **not an official leaderboard result and not proof of being ahead** (the leaderboard requires 5 attempts; we ran one). Raw result files + full reproduction steps: [atlarix.dev/benchmark](https://atlarix.dev/benchmark).
+**Benchmarks:** [**atlarix.dev/benchmark**](https://atlarix.dev/benchmark) is the official home for all Atlarix benchmark work — every comparison (Terminal-Bench and beyond), with raw result files, full reproduction steps, and honest framing. It's updated as we add more models and tests, so check there for the current results rather than a snapshot here.
 
 ---
 
