@@ -81,14 +81,14 @@ This table is generated from `core-models.json` by a GitHub Action — edit only
 
 ## Research
 
-A technical paper documenting Atlarix's Blueprint context management system has been published on Zenodo:
+A technical paper on the research behind Atlarix's context-management design has been published on Zenodo:
 
 **Blueprint: Section-Scoped Structural Graph Retrieval and Post-Turn Compression for Agentic LLM Coding in Multi-Repository Workspaces**  
 Amariah Kamau — May 2026  
 DOI: [10.5281/zenodo.20381860](https://doi.org/10.5281/zenodo.20381860)  
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20381860.svg)](https://doi.org/10.5281/zenodo.20381860)
 
-If you are evaluating Atlarix for a large or multi-repository codebase, this paper documents the technical evidence behind the Blueprint system.
+If you are evaluating Atlarix for a large or multi-repository codebase, this paper documents the technical evidence for its multi-repo exploration approach. It's foundational research; the shipping app now uses bundled ripgrep for retrieval.
 
 **Benchmarks:** [**atlarix.dev/benchmark**](https://atlarix.dev/benchmark) is the official home for all Atlarix benchmark work — every comparison (Terminal-Bench and beyond), with raw result files, full reproduction steps, and honest framing. It's updated as we add more models and tests, so check there for the current results rather than a snapshot here.
 
