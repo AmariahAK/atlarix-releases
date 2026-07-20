@@ -64,8 +64,8 @@ The models currently powering Atlarix Core:
 <!-- CORE_MODELS:START (auto-generated from core-models.json — do not edit by hand) -->
 | Tier | Model |
 | --- | --- |
-| Core 1 | `moonshotai/kimi-k2.7-code` |
-| Core 2 | `qwen/qwen3.7-plus` |
+| Core 1 | `moonshotai/kimi-k3` |
+| Core 2 | `qwen/qwen3.7-max` |
 | Core 3 | `deepseek/deepseek-v4-pro` |
 | Core 4 | `minimax/minimax-m3` |
 <!-- CORE_MODELS:END -->
