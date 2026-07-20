@@ -1,8 +1,8 @@
 {
   "version": 1,
   "models": {
-    "core-1": "moonshotai/kimi-k2.7-code",
-    "core-2": "qwen/qwen3.7-plus",
+    "core-1": "moonshotai/kimi-k3",
+    "core-2": "qwen/qwen3.7-max",
     "core-3": "deepseek/deepseek-v4-pro",
     "core-4": "minimax/minimax-m3"
   }
