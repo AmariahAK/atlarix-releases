@@ -1,6 +1,6 @@
 # Atlarix Releases
 
-This is the **official release repository** for [Atlarix](https://atlarix.dev) — the open-weight frontier harness. Atlarix is the agent workstation built for the open-weight frontier labs (DeepSeek, Qwen, Kimi, MiniMax) — deep research, code generation, and debugging with any-model BYOK and local-first execution.
+This is the **official release repository** for [Atlarix](https://atlarix.dev) — the agent workstation built for the open-weight frontier. Managed cloud models via Atlarix Core, your own API keys across 145+ providers, and local models — deep research, code generation, and debugging without replacing your editor.
 
 **Main website:** [atlarix.dev](https://atlarix.dev)  
 **Built by:** [Norah Labs](https://norahlabs.com/)
@@ -88,7 +88,7 @@ Amariah Kamau — May 2026
 DOI: [10.5281/zenodo.20381860](https://doi.org/10.5281/zenodo.20381860)  
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20381860.svg)](https://doi.org/10.5281/zenodo.20381860)
 
-If you are evaluating Atlarix for a large or multi-repository codebase, this paper documents the technical evidence for its multi-repo exploration approach. It's foundational research; the shipping app now uses bundled ripgrep for retrieval.
+If you are evaluating Atlarix for a large or multi-repository codebase, this paper documents the technical evidence for its multi-repo exploration approach. The shipping app uses bundled ripgrep for fast, index-free retrieval.
 
 **Benchmarks:** [**atlarix.dev/benchmark**](https://atlarix.dev/benchmark) is the official home for all Atlarix benchmark work — every comparison (Terminal-Bench and beyond), with raw result files, full reproduction steps, and honest framing. It's updated as we add more models and tests, so check there for the current results rather than a snapshot here.
 
