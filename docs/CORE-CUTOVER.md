@@ -44,26 +44,33 @@ the worst-case reserve) and its 1M context window.
 Recommended order — cheapest and best-understood first, each watched for a day against
 the provider's own dashboard before the next:
 
-**core-3 DeepSeek → core-2 Z.ai/GLM → core-1 Moonshot/Kimi**
+**core-2 DeepSeek → core-1 Z.ai/GLM → (Kimi, when its billing is sorted)**
 
 ## The lineup
 
-Three models, all on PAYG APIs (not coding subscriptions — that matters, a Z.ai coding
-plan lives at a different base URL, `.../api/coding/paas/v4`):
+Launching with TWO models. Kimi is held back until its billing works — the code
+supports 2, 3 or 4 and an unmapped slot is simply absent from the picker, so adding it
+later is one `models` entry plus one `routing` entry.
 
-| Slot | Model | Provider | models.dev id |
-|---|---|---|---|
-| core-1 | Kimi K3 | `moonshot` | `kimi-k3` |
-| core-2 | GLM 5.2 | `zai` | `glm-5.2` |
-| core-3 | DeepSeek V4 Pro | `deepseek` | `deepseek-v4-pro` |
+| Slot | Model | Provider | Wire id | models.dev id |
+|---|---|---|---|---|
+| core-1 | GLM 5.2 | `zai` | `z-ai/glm-5.2` | `glm-5.2` |
+| core-2 | DeepSeek V4 Pro | `deepseek` | `deepseek/deepseek-v4-pro` | `deepseek-v4-pro` |
 
-There are four SLOTS in the code but the lineup is whatever `models` maps — an
-unmapped slot is omitted from the picker entirely, so going to 2 or back to 4 is a
-config edit with no code change.
+All on PAYG APIs — a Z.ai *coding plan* would be a different base URL
+(`.../api/coding/paas/v4`), so do not mix them up.
 
-All three are TEXT-ONLY. That is a deliberate trade: attachments route through the PDF
-and file tools rather than a vision model. If image input becomes important, `zai`'s
-`glm-5v-turbo` accepts image/video/pdf at $1.20/$4.00 (200K context, not 1M).
+**Wire ids are OpenRouter-valid on purpose.** An unrouted tier still forwards to
+OpenRouter, so a wire id OpenRouter does not recognise means that tier is broken before
+its cutover AND has no rollback target after it. Note `z-ai/glm-5.2` — OpenRouter spells
+Z.ai `z-ai`, not `zai`.
+
+**Kimi K3 has no OpenRouter equivalent** (its catalog stops at k2.7-code). So when Kimi
+is added it must be routed direct in the SAME commit — there is nothing to fall back to.
+
+Both current models are text-only: attachments go through the PDF and file tools. If
+image input becomes important, `zai`'s `glm-5v-turbo` takes image/video/pdf at
+$1.20/$4.00 (200K context, not 1M).
 
 ## Rollback
 
