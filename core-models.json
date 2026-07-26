@@ -1,9 +1,43 @@
 {
   "version": 1,
   "models": {
-    "core-1": "moonshotai/kimi-k3",
-    "core-2": "qwen/qwen3.7-max",
-    "core-3": "deepseek/deepseek-v4-pro",
-    "core-4": "minimax/minimax-m3"
+    "core-1": "z-ai/glm-5.2",
+    "core-2": "deepseek/deepseek-v4-pro"
+  },
+  "webSearch": {
+    "core-1": false,
+    "core-2": false
+  },
+  "providers": {
+    "deepseek": {
+      "baseUrl": "https://api.deepseek.com",
+      "apiKeyEnv": "DEEPSEEK_API_KEY",
+      "protocol": "openai",
+      "balanceEndpoint": "https://api.deepseek.com/user/balance"
+    },
+    "zai": {
+      "baseUrl": "https://api.z.ai/api/paas/v4",
+      "apiKeyEnv": "ZHIPU_API_KEY",
+      "protocol": "openai",
+      "balanceEndpoint": null
+    },
+    "moonshot": {
+      "baseUrl": "https://api.moonshot.ai/v1",
+      "apiKeyEnv": "MOONSHOT_API_KEY",
+      "protocol": "openai",
+      "balanceEndpoint": null
+    }
+  },
+  "routing": {
+    "core-1": {
+      "provider": "zai",
+      "apiModelId": "glm-5.2",
+      "cacheHitField": null
+    },
+    "core-2": {
+      "provider": "deepseek",
+      "apiModelId": "deepseek-v4-pro",
+      "cacheHitField": "prompt_cache_hit_tokens"
+    }
   }
 }

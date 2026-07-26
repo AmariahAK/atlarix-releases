@@ -20,7 +20,31 @@ Most users want the desktop app above. If you want to **run the Atlarix agent fr
 - **Download:** [`atlarix-headless-<version>.tar.gz`](https://github.com/AmariahAK/atlarix-releases/releases/tag/headless-bench) from the **headless-bench** release. It's an Electron-free Node bundle (`linux/amd64`, runtime-only) that drives the real agent loop. Requires **Node 20+**.
 - **Unpack:** `mkdir -p /opt/atlarix && tar -xzf atlarix-headless-*.tar.gz -C /opt/atlarix`
 
-**Run a task** (OpenRouter, pinned provider):
+**Run a task** against a provider's own API — the recommended path, and the one Atlarix
+Core itself uses. Use your key straight from the provider; note the model id here is the
+vendor's own (`deepseek-v4-pro`), not a gateway-prefixed one:
+
+```bash
+export DEEPSEEK_API_KEY="sk-..."
+node /opt/atlarix/dist-headless/atlarix-headless.mjs \
+  --workspace /path/to/repo \
+  --prompt-file task.md \
+  --provider-url https://api.deepseek.com \
+  --model deepseek-v4-pro \
+  --api-key "$DEEPSEEK_API_KEY"
+```
+
+The same shape works for any OpenAI-compatible endpoint — swap the base URL and model:
+
+| Provider | `--provider-url` | `--model` |
+| --- | --- | --- |
+| DeepSeek | `https://api.deepseek.com` | `deepseek-v4-pro` |
+| Z.ai (GLM) | `https://api.z.ai/api/paas/v4` | `glm-5.2` |
+| Moonshot (Kimi) | `https://api.moonshot.ai/v1` | `kimi-k3` |
+| Local Ollama | `http://localhost:11434/v1` | whatever you have pulled |
+
+**Or through OpenRouter**, pinned to one provider — useful when a comparison needs
+byte-identical weights and precision across runs:
 
 ```bash
 export OPENROUTER_API_KEY="sk-or-v1-..."
@@ -31,14 +55,6 @@ node /opt/atlarix/dist-headless/atlarix-headless.mjs \
   --model deepseek/deepseek-v4-pro \
   --api-key "$OPENROUTER_API_KEY" \
   --openrouter-provider '{"order":["deepinfra"],"allow_fallbacks":false}'
-```
-
-**Or a custom OpenAI-compatible endpoint** (e.g. DeepSeek direct, local Ollama):
-
-```bash
-node /opt/atlarix/dist-headless/atlarix-headless.mjs \
-  --workspace . --prompt "Fix the failing test in src/auth.ts" \
-  --provider-url https://api.deepseek.com --model deepseek-v4-pro --api-key "$DEEPSEEK_API_KEY"
 ```
 
 | Flag | Env var | Default | Notes |
@@ -64,10 +80,8 @@ The models currently powering Atlarix Core:
 <!-- CORE_MODELS:START (auto-generated from core-models.json — do not edit by hand) -->
 | Tier | Model |
 | --- | --- |
-| Core 1 | `moonshotai/kimi-k3` |
-| Core 2 | `qwen/qwen3.7-max` |
-| Core 3 | `deepseek/deepseek-v4-pro` |
-| Core 4 | `minimax/minimax-m3` |
+| Core 1 | `z-ai/glm-5.2` |
+| Core 2 | `deepseek/deepseek-v4-pro` |
 <!-- CORE_MODELS:END -->
 
 This table is generated from `core-models.json` by a GitHub Action — edit only the JSON and the table updates itself. (No API keys live here; only model identifiers.)
