@@ -44,7 +44,26 @@ the worst-case reserve) and its 1M context window.
 Recommended order — cheapest and best-understood first, each watched for a day against
 the provider's own dashboard before the next:
 
-**core-3 DeepSeek → core-4 MiniMax → core-1 Moonshot → core-2 Qwen**
+**core-3 DeepSeek → core-2 Z.ai/GLM → core-1 Moonshot/Kimi**
+
+## The lineup
+
+Three models, all on PAYG APIs (not coding subscriptions — that matters, a Z.ai coding
+plan lives at a different base URL, `.../api/coding/paas/v4`):
+
+| Slot | Model | Provider | models.dev id |
+|---|---|---|---|
+| core-1 | Kimi K3 | `moonshot` | `kimi-k3` |
+| core-2 | GLM 5.2 | `zai` | `glm-5.2` |
+| core-3 | DeepSeek V4 Pro | `deepseek` | `deepseek-v4-pro` |
+
+There are four SLOTS in the code but the lineup is whatever `models` maps — an
+unmapped slot is omitted from the picker entirely, so going to 2 or back to 4 is a
+config edit with no code change.
+
+All three are TEXT-ONLY. That is a deliberate trade: attachments route through the PDF
+and file tools rather than a vision model. If image input becomes important, `zai`'s
+`glm-5v-turbo` accepts image/video/pdf at $1.20/$4.00 (200K context, not 1M).
 
 ## Rollback
 
