@@ -41,53 +41,51 @@ key for price and context-window lookup. `MiniMax-M3` is capitalised while the w
 is `minimax/minimax-m3`; getting this wrong loses that tier's price (it then bills at
 the worst-case reserve) and its 1M context window.
 
-Recommended order — cheapest and best-understood first, each watched for a day against
-the provider's own dashboard before the next:
-
-**core-2 DeepSeek → core-1 Z.ai/GLM → (Kimi, once its key works)**
+Both tiers ship routed direct. Core does not use OpenRouter at all any more — the only
+OpenRouter traffic left in the product is a user's own BYOK key, which never reaches this
+proxy.
 
 ## The lineup
 
-Launching with TWO models. Kimi is held out until its API key works — the code supports
-2, 3 or 4 and an unmapped slot is simply absent from the picker, so adding it later is
-one `models` entry plus one `routing` entry, no release.
+| Slot | Model | Provider | Wire id | models.dev id | Key |
+|---|---|---|---|---|---|
+| core-1 | GLM 5.2 | `zai` | `z-ai/glm-5.2` | `glm-5.2` | `ZHIPU_API_KEY` |
+| core-2 | DeepSeek V4 Pro | `deepseek` | `deepseek/deepseek-v4-pro` | `deepseek-v4-pro` | `DEEPSEEK_API_KEY` |
 
-A `providers.moonshot` block is already present and is completely inert: a provider only
-does anything once a tier's `routing` names it.
+Both on PAYG APIs — a Z.ai *coding plan* is a different base URL
+(`.../api/coding/paas/v4`), so do not mix them up.
+
+Slots 3 and 4 are parked as `TBA`, which every layer reads as EMPTY. They have to carry a
+placeholder rather than an empty string because GitHub Actions secrets cannot hold an empty
+value. Adding a third model is one `models` entry plus one `routing` entry — no release.
+
+Both models are text-only: attachments go through the PDF and file tools. If image input
+becomes important, `zai`'s `glm-5v-turbo` takes image/video/pdf at $1.20/$4.00 (200K
+context, not 1M).
 
 ## Verifying a model id before you paste it
 
 `node scripts/pick-core-model.mjs` checks the two things that fail SILENTLY — whether the
-id exists in models.dev (no price row ⇒ the tier bills at its worst-case reserve) and
+id exists in models.dev (no price row ⇒ that tier bills at its worst-case reserve) and
 whether the wire id exists on OpenRouter (no rollback target). Run
-`node scripts/pick-core-model.mjs --check` to audit whatever is currently configured.
-
-| Slot | Model | Provider | Wire id | models.dev id |
-|---|---|---|---|---|
-| core-1 | GLM 5.2 | `zai` | `z-ai/glm-5.2` | `glm-5.2` |
-| core-2 | DeepSeek V4 Pro | `deepseek` | `deepseek/deepseek-v4-pro` | `deepseek-v4-pro` |
-
-All on PAYG APIs — a Z.ai *coding plan* would be a different base URL
-(`.../api/coding/paas/v4`), so do not mix them up.
-
-**Wire ids are OpenRouter-valid on purpose.** An unrouted tier still forwards to
-OpenRouter, so a wire id OpenRouter does not recognise means that tier is broken before
-its cutover AND has no rollback target after it. Note `z-ai/glm-5.2` — OpenRouter spells
-Z.ai `z-ai`, not `zai`.
-
-Kimi K3 **is** on OpenRouter (`moonshotai/kimi-k3`), so it has a working rollback target
-whenever it is added. It is held out of `models` only because its API key is not yet
-usable — an empty key would fail every request to that tier.
-
-Both current models are text-only: attachments go through the PDF and file tools. If
-image input becomes important, `zai`'s `glm-5v-turbo` takes image/video/pdf at
-$1.20/$4.00 (200K context, not 1M).
+`node scripts/pick-core-model.mjs --check` to audit whatever is currently configured; it
+exits non-zero on a problem, so it can gate a deploy.
 
 ## Rollback
 
-Delete that tier's `routing` entry. It reverts to OpenRouter on the next refresh — no
-redeploy, no release. Keep `COMPASS_OPENROUTER_API_KEY` in Railway for exactly this
-reason.
+Delete that tier's `routing` entry and it reverts to OpenRouter on the next refresh — no
+redeploy, no release.
+
+That path needs two things to actually work, and both are easy to lose now that nothing
+uses it day to day:
+- `COMPASS_OPENROUTER_API_KEY` still set in Railway. It is no longer required at boot (the
+  proxy starts fine without it), so an unrouted tier with no key returns
+  `core_unavailable` and alerts, naming this as the cause.
+- A wire id OpenRouter actually recognises. `z-ai/glm-5.2` and
+  `deepseek/deepseek-v4-pro` both qualify — that is why wire ids are kept
+  OpenRouter-valid even though Core no longer routes through it.
+
+Keeping the key is cheap insurance. Dropping it makes rollback a redeploy.
 
 ## `webSearch` is false on every tier
 
