@@ -44,13 +44,23 @@ the worst-case reserve) and its 1M context window.
 Recommended order — cheapest and best-understood first, each watched for a day against
 the provider's own dashboard before the next:
 
-**core-2 DeepSeek → core-1 Z.ai/GLM → (Kimi, when its billing is sorted)**
+**core-2 DeepSeek → core-1 Z.ai/GLM → (Kimi, once its key works)**
 
 ## The lineup
 
-Launching with TWO models. Kimi is held back until its billing works — the code
-supports 2, 3 or 4 and an unmapped slot is simply absent from the picker, so adding it
-later is one `models` entry plus one `routing` entry.
+Launching with TWO models. Kimi is held out until its API key works — the code supports
+2, 3 or 4 and an unmapped slot is simply absent from the picker, so adding it later is
+one `models` entry plus one `routing` entry, no release.
+
+A `providers.moonshot` block is already present and is completely inert: a provider only
+does anything once a tier's `routing` names it.
+
+## Verifying a model id before you paste it
+
+`node scripts/pick-core-model.mjs` checks the two things that fail SILENTLY — whether the
+id exists in models.dev (no price row ⇒ the tier bills at its worst-case reserve) and
+whether the wire id exists on OpenRouter (no rollback target). Run
+`node scripts/pick-core-model.mjs --check` to audit whatever is currently configured.
 
 | Slot | Model | Provider | Wire id | models.dev id |
 |---|---|---|---|---|
@@ -65,8 +75,9 @@ OpenRouter, so a wire id OpenRouter does not recognise means that tier is broken
 its cutover AND has no rollback target after it. Note `z-ai/glm-5.2` — OpenRouter spells
 Z.ai `z-ai`, not `zai`.
 
-**Kimi K3 has no OpenRouter equivalent** (its catalog stops at k2.7-code). So when Kimi
-is added it must be routed direct in the SAME commit — there is nothing to fall back to.
+Kimi K3 **is** on OpenRouter (`moonshotai/kimi-k3`), so it has a working rollback target
+whenever it is added. It is held out of `models` only because its API key is not yet
+usable — an empty key would fail every request to that tier.
 
 Both current models are text-only: attachments go through the PDF and file tools. If
 image input becomes important, `zai`'s `glm-5v-turbo` takes image/video/pdf at
