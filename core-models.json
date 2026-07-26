@@ -5,5 +5,44 @@
     "core-2": "qwen/qwen3.7-max",
     "core-3": "deepseek/deepseek-v4-pro",
     "core-4": "minimax/minimax-m3"
+  },
+  "webSearch": {
+    "core-1": false,
+    "core-2": false,
+    "core-3": false,
+    "core-4": false
+  },
+  "providers": {
+    "deepseek": {
+      "baseUrl": "https://api.deepseek.com",
+      "apiKeyEnv": "DEEPSEEK_API_KEY",
+      "protocol": "openai",
+      "balanceEndpoint": "https://api.deepseek.com/user/balance"
+    },
+    "qwen": {
+      "baseUrl": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+      "apiKeyEnv": "DASHSCOPE_API_KEY",
+      "protocol": "openai",
+      "balanceEndpoint": null
+    },
+    "moonshot": {
+      "baseUrl": "https://api.moonshot.ai/v1",
+      "apiKeyEnv": "MOONSHOT_API_KEY",
+      "protocol": "openai",
+      "balanceEndpoint": null
+    },
+    "minimax": {
+      "baseUrl": "https://api.minimax.io/v1",
+      "apiKeyEnv": "MINIMAX_API_KEY",
+      "protocol": "openai",
+      "balanceEndpoint": null
+    }
+  },
+  "routing": {
+    "core-3": {
+      "provider": "deepseek",
+      "apiModelId": "deepseek-v4-pro",
+      "cacheHitField": "prompt_cache_hit_tokens"
+    }
   }
 }
