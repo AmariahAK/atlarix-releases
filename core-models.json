@@ -2,15 +2,13 @@
   "version": 1,
   "models": {
     "core-1": "moonshotai/kimi-k3",
-    "core-2": "qwen/qwen3.7-max",
-    "core-3": "deepseek/deepseek-v4-pro",
-    "core-4": "minimax/minimax-m3"
+    "core-2": "zai/glm-5.2",
+    "core-3": "deepseek/deepseek-v4-pro"
   },
   "webSearch": {
     "core-1": false,
     "core-2": false,
-    "core-3": false,
-    "core-4": false
+    "core-3": false
   },
   "providers": {
     "deepseek": {
@@ -19,21 +17,15 @@
       "protocol": "openai",
       "balanceEndpoint": "https://api.deepseek.com/user/balance"
     },
-    "qwen": {
-      "baseUrl": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
-      "apiKeyEnv": "DASHSCOPE_API_KEY",
-      "protocol": "openai",
-      "balanceEndpoint": null
-    },
     "moonshot": {
       "baseUrl": "https://api.moonshot.ai/v1",
       "apiKeyEnv": "MOONSHOT_API_KEY",
       "protocol": "openai",
       "balanceEndpoint": null
     },
-    "minimax": {
-      "baseUrl": "https://api.minimax.io/v1",
-      "apiKeyEnv": "MINIMAX_API_KEY",
+    "zai": {
+      "baseUrl": "https://api.z.ai/api/paas/v4",
+      "apiKeyEnv": "ZHIPU_API_KEY",
       "protocol": "openai",
       "balanceEndpoint": null
     }
