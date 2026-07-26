@@ -29,6 +29,11 @@
     }
   },
   "routing": {
+    "core-1": {
+      "provider": "zai",
+      "apiModelId": "glm-5.2",
+      "cacheHitField": null
+    },
     "core-2": {
       "provider": "deepseek",
       "apiModelId": "deepseek-v4-pro",
