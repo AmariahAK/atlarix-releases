@@ -86,6 +86,18 @@ The models currently powering Atlarix Core:
 
 This table is generated from `core-models.json` by a GitHub Action — edit only the JSON and the table updates itself. (No API keys live here; only model identifiers.)
 
+## What's new notes
+
+[`updates.json`](updates.json) is the short note the desktop app shows in its bottom-left "what's new" panel. It is published here rather than bundled into the app for one reason: **a note bundled into a release only reaches people who have already updated**, which is backwards for telling someone an update exists.
+
+Each entry is `{ id, title, body, link, linkLabel }`. The app shows the FIRST entry and remembers the `id` it dismissed, so:
+
+- Editing an entry's text **does not** bring the panel back for someone who dismissed it. That is deliberate — a typo fix is not news.
+- Adding a new entry with a **new `id`** surfaces the panel again for everyone.
+- Reusing an old `id` is the one thing to avoid: it will stay dismissed for exactly the people who have seen the least of it.
+
+Keep `body` to a line or two. The moment it wants scrolling it has become the changelog, and [there already is one](https://www.atlarix.dev/changelog). The app ships no bundled copy of this file and renders **nothing** if the fetch fails — an empty panel is worse than no panel.
+
 ## Links
 
 - [Atlarix](https://atlarix.dev) — product and download page  
