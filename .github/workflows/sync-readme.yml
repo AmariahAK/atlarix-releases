@@ -1,27 +1,61 @@
 name: Sync README Core models
 
-# Keep the README "Atlarix Core models" table in sync with core-models.json.
+# Keep the README "Atlarix Core models" table in sync with core-models.json,
+# and check that updates.json is something the app can actually show.
 # core-models.json is the single source of truth; edit only the JSON.
+#
+# updates.json runs on PULL REQUESTS too, unlike the README sync. The sync can
+# only ever be applied after a merge — it rewrites a file — but a malformed
+# updates.json is published the moment it lands on main and every installed
+# client picks it up within the hour, silently showing nothing. That is worth
+# catching before the merge rather than after.
 
 on:
   push:
     branches: [main]
     paths:
       - "core-models.json"
+      - "updates.json"
       - "scripts/gen-readme-models.mjs"
+      - "scripts/check-updates.mjs"
       - ".github/workflows/sync-readme.yml"
+  pull_request:
+    paths:
+      - "updates.json"
+      - "scripts/check-updates.mjs"
   workflow_dispatch:
 
-permissions:
-  contents: write
+# Per JOB, not workflow-wide: the validator reads a file and needs nothing, and
+# a token with write access sitting on a pull_request run is write access
+# granted to whoever opened the pull request.
+permissions: {}
 
+# Keyed on the ref. A single global group would mean a pull-request run and an
+# in-flight main sync cancel each other, and the one that loses is whichever
+# started first — which is the merge that actually needed to finish.
 concurrency:
-  group: sync-readme
+  group: sync-readme-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  sync:
+  check-updates:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Validate updates.json
+        run: node scripts/check-updates.mjs
+
+  sync:
+    # Only after a merge: this job rewrites README.md and pushes.
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
