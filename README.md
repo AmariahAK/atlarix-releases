@@ -96,6 +96,8 @@ Each entry is `{ id, title, body, link, linkLabel }`. The app shows the FIRST en
 - Adding a new entry with a **new `id`** surfaces the panel again for everyone.
 - Reusing an old `id` is the one thing to avoid: it will stay dismissed for exactly the people who have seen the least of it.
 
+`node scripts/check-updates.mjs` checks the file against the rules the app applies, and CI runs it on every pull request that touches it. That check exists because the app's failure mode here is **silence**: on anything it cannot use it renders nothing, deliberately, so a missing field or an `http://` link looks exactly like "there is no note right now".
+
 Keep `body` to a line or two. The moment it wants scrolling it has become the changelog, and [there already is one](https://www.atlarix.dev/changelog). The app ships no bundled copy of this file and renders **nothing** if the fetch fails — an empty panel is worse than no panel.
 
 ## Links
