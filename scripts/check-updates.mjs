@@ -47,10 +47,24 @@ try {
   process.exit(1);
 }
 
+/** Print whatever went wrong and stop. */
+function report() {
+  console.error("updates.json would not be shown by the app:\n");
+  for (const p of problems) console.error(`  - ${p}`);
+  process.exit(1);
+}
+
 const entries = raw?.entries;
 if (!Array.isArray(entries)) {
+  // REPORT AND STOP, not `fail()` and fall through. `fail` only records — it
+  // does not return — so continuing here reached `entries.forEach` on a value
+  // that is not an array and died with an unhandled TypeError, printing a stack
+  // trace instead of the one clear sentence this script exists to print. The
+  // check was right and the exit code was right; the output was useless.
   fail("`entries` must be an array — the app reads the first element of it.");
-} else if (entries.length === 0) {
+  report();
+}
+if (entries.length === 0) {
   // Not an error: an empty list is a deliberate "nothing to say", and the app
   // treats it as clearing the note rather than as a broken file.
   console.log("updates.json has no entries — the app will show no panel.");
@@ -96,10 +110,6 @@ entries.forEach((entry, i) => {
   }
 });
 
-if (problems.length > 0) {
-  console.error("updates.json would not be shown by the app:\n");
-  for (const p of problems) console.error(`  - ${p}`);
-  process.exit(1);
-}
+if (problems.length > 0) report();
 
 console.log(`updates.json is publishable (${entries.length} entr${entries.length === 1 ? "y" : "ies"}).`);
