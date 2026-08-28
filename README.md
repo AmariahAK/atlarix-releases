@@ -73,7 +73,7 @@ Exit code **0** = the agent completed the turn; **1** = timeout/error; **2** = b
 
 ## Atlarix Core models
 
-[`core-models.json`](core-models.json) is the live mapping of the four **Atlarix Core** tiers to the underlying models they run on. The desktop app reads this file at startup (and hourly), so the Core models can be updated here **without shipping a new app release**.
+[`core-models.json`](core-models.json) is the live mapping of the **Atlarix Core** slots to the underlying models they run on. It is a map, not a fixed four — an unconfigured slot is empty everywhere, so the lineup is exactly what the file names and no more. The desktop app reads it at startup (and hourly) and the proxy every ten minutes, so the Core models can be updated here **without shipping a new app release**.
 
 The models currently powering Atlarix Core:
 
