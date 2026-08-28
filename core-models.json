@@ -1,7 +1,7 @@
 {
   "version": 1,
   "models": {
-    "core-1": "z-ai/glm-5.2",
+    "core-1": "z-ai/glm-5.3",
     "core-2": "deepseek/deepseek-v4-pro"
   },
   "webSearch": {
@@ -31,7 +31,7 @@
   "routing": {
     "core-1": {
       "provider": "zai",
-      "apiModelId": "glm-5.2",
+      "apiModelId": "glm-5.3",
       "cacheHitField": null
     },
     "core-2": {
