@@ -110,6 +110,45 @@ entries.forEach((entry, i) => {
   }
 });
 
+/**
+ * IS THE FIRST ENTRY ACTUALLY THE NEWEST?
+ *
+ * The app reads `entries[0]` and nothing else. So appending a new note to the
+ * END of the array — which is the natural thing to do to a list, and which every
+ * check above passes happily — publishes nothing: the app keeps showing the old
+ * top entry, and the note nobody sees is the one that was just written.
+ *
+ * That is the same failure mode as the rest of this file. The app does not
+ * complain about a note it cannot see any more than it complains about an
+ * `http://` link; it just renders the wrong thing, silently, and the person who
+ * wrote the note has no way to tell.
+ *
+ * Version-shaped ids only. Ids are free-form by design (the dismissal key is
+ * whatever you make it), so anything that is not `major.minor.patch` is skipped
+ * rather than guessed at — an unordered pair of non-version ids is not evidence
+ * of a mistake.
+ */
+const version = (id) => {
+  const m = /^v?(\d+)\.(\d+)\.(\d+)$/.exec(id);
+  return m ? Number(m[1]) * 1e6 + Number(m[2]) * 1e3 + Number(m[3]) : null;
+};
+
+const versioned = entries
+  .map((e, i) => ({ i, id: typeof e?.id === "string" ? e.id.trim() : "", v: version(typeof e?.id === "string" ? e.id.trim() : "") }))
+  .filter((e) => e.v !== null);
+
+for (let i = 1; i < versioned.length; i++) {
+  if (versioned[i].v > versioned[i - 1].v) {
+    fail(
+      `entries[${versioned[i].i}] ("${versioned[i].id}") is newer than ` +
+        `entries[${versioned[i - 1].i}] ("${versioned[i - 1].id}"). ` +
+        `The app shows entries[0] only, so a newer note further down is never seen — ` +
+        `put the newest entry first.`,
+    );
+    break;
+  }
+}
+
 if (problems.length > 0) report();
 
 console.log(`updates.json is publishable (${entries.length} entr${entries.length === 1 ? "y" : "ies"}).`);
