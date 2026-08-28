@@ -49,7 +49,7 @@ proxy.
 
 | Slot | Model | Provider | Wire id | models.dev id | Key |
 |---|---|---|---|---|---|
-| core-1 | GLM 5.2 | `zai` | `z-ai/glm-5.2` | `glm-5.2` | `ZHIPU_API_KEY` |
+| core-1 | GLM 5.3 | `zai` | `z-ai/glm-5.3` | `glm-5.3` | `ZHIPU_API_KEY` |
 | core-2 | DeepSeek V4 Pro | `deepseek` | `deepseek/deepseek-v4-pro` | `deepseek-v4-pro` | `DEEPSEEK_API_KEY` |
 
 Both on PAYG APIs — a Z.ai *coding plan* is a different base URL
@@ -81,7 +81,7 @@ uses it day to day:
 - `COMPASS_OPENROUTER_API_KEY` still set in Railway. It is no longer required at boot (the
   proxy starts fine without it), so an unrouted tier with no key returns
   `core_unavailable` and alerts, naming this as the cause.
-- A wire id OpenRouter actually recognises. `z-ai/glm-5.2` and
+- A wire id OpenRouter actually recognises. `z-ai/glm-5.3` and
   `deepseek/deepseek-v4-pro` both qualify — that is why wire ids are kept
   OpenRouter-valid even though Core no longer routes through it.
 

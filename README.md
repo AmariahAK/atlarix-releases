@@ -39,7 +39,7 @@ The same shape works for any OpenAI-compatible endpoint — swap the base URL an
 | Provider | `--provider-url` | `--model` |
 | --- | --- | --- |
 | DeepSeek | `https://api.deepseek.com` | `deepseek-v4-pro` |
-| Z.ai (GLM) | `https://api.z.ai/api/paas/v4` | `glm-5.2` |
+| Z.ai (GLM) | `https://api.z.ai/api/paas/v4` | `glm-5.3` |
 | Moonshot (Kimi) | `https://api.moonshot.ai/v1` | `kimi-k3` |
 | Local Ollama | `http://localhost:11434/v1` | whatever you have pulled |
 
