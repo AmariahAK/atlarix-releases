@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "id": "14.38.3",
+      "title": "Atlarix Core 1 is now GLM 5.3",
+      "body": "Core 1 moved to GLM 5.3 \u2014 same 1M context, same price, and deep thinking scales to what the model supports. Nothing to install; it is already live.",
+      "link": "https://www.atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
       "id": "14.38.2",
       "title": "Your plan updates when you come back",
       "body": "Upgrading happens in a browser, so Atlarix now re-checks your plan every time you return to the window instead of only after it had been idle.",
