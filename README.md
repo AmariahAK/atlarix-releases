@@ -80,7 +80,7 @@ The models currently powering Atlarix Core:
 <!-- CORE_MODELS:START (auto-generated from core-models.json — do not edit by hand) -->
 | Tier | Model |
 | --- | --- |
-| Core 1 | `z-ai/glm-5.2` |
+| Core 1 | `z-ai/glm-5.3` |
 | Core 2 | `deepseek/deepseek-v4-pro` |
 <!-- CORE_MODELS:END -->
 
