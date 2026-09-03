@@ -2,9 +2,16 @@
   "version": 1,
   "entries": [
     {
+      "id": "14.42.0",
+      "title": "Talk to Atlarix while it is working",
+      "body": "A message you type mid-turn now reaches the turn that is running, instead of waiting for it to end. Type as many as you like — each one is cancellable until it is picked up.",
+      "link": "https://www.atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
       "id": "14.38.3",
       "title": "Atlarix Core 1 is now GLM 5.3",
-      "body": "Core 1 moved to GLM 5.3 \u2014 same 1M context, same price, and deep thinking scales to what the model supports. Nothing to install; it is already live.",
+      "body": "Core 1 moved to GLM 5.3 — same 1M context, same price, and deep thinking scales to what the model supports. Nothing to install; it is already live.",
       "link": "https://www.atlarix.dev/changelog",
       "linkLabel": "What's new"
     },
@@ -19,13 +26,6 @@
       "id": "14.38.1",
       "title": "A usage bar that reads as a percentage",
       "body": "Settings shows how much of this month's included usage you have spent, and leads with the credit you bought. Your account page now separates Atlarix from Atlarix Reviewer.",
-      "link": "https://www.atlarix.dev/changelog",
-      "linkLabel": "What's new"
-    },
-    {
-      "id": "14.38.0",
-      "title": "Atlarix Core, included with Pro",
-      "body": "Pro now includes Atlarix Core for everyday work, and Settings shows what is included this month separately from credit you bought.",
       "link": "https://www.atlarix.dev/changelog",
       "linkLabel": "What's new"
     }
