@@ -25,9 +25,9 @@ Add one entry under `routing`. That is the whole change.
 ```jsonc
 "routing": {
   "core-3": {
-    "provider": "deepseek",              // must match a `providers` key
-    "apiModelId": "deepseek-v4-pro",     // the VENDOR's own id
-    "cacheHitField": "prompt_cache_hit_tokens"
+    "provider": "openai",                // must match a `providers` key
+    "apiModelId": "gpt-5.6-terra",       // the VENDOR's own id
+    "cacheHitField": null                // see the cache note below
   }
 }
 ```
@@ -50,18 +50,36 @@ proxy.
 | Slot | Model | Provider | Wire id | models.dev id | Key |
 |---|---|---|---|---|---|
 | core-1 | GLM 5.3 | `zai` | `z-ai/glm-5.3` | `glm-5.3` | `ZHIPU_API_KEY` |
-| core-2 | DeepSeek V4 Pro | `deepseek` | `deepseek/deepseek-v4-pro` | `deepseek-v4-pro` | `DEEPSEEK_API_KEY` |
+| core-2 | GPT 5.6 Terra | `openai` | `openai/gpt-5.6-terra` | `gpt-5.6-terra` | `OPENAI_API_KEY` |
+| core-3 | GPT 5.6 Sol | `openai` | `openai/gpt-5.6-sol` | `gpt-5.6-sol` | `OPENAI_API_KEY` |
 
-Both on PAYG APIs — a Z.ai *coding plan* is a different base URL
+All on PAYG APIs — a Z.ai *coding plan* is a different base URL
 (`.../api/coding/paas/v4`), so do not mix them up.
 
-Slots 3 and 4 are parked as `TBA`, which every layer reads as EMPTY. They have to carry a
-placeholder rather than an empty string because GitHub Actions secrets cannot hold an empty
-value. Adding a third model is one `models` entry plus one `routing` entry — no release.
+Slot 4 simply has no key in `models`, which every layer reads as EMPTY. (A parked slot may
+also carry the `TBA` sentinel — that exists because GitHub Actions secrets cannot hold an
+empty value — but the live config just omits it.) Adding a fourth model is one `models`
+entry plus one `routing` entry — no release.
 
-Both models are text-only: attachments go through the PDF and file tools. If image input
-becomes important, `zai`'s `glm-5v-turbo` takes image/video/pdf at $1.20/$4.00 (200K
-context, not 1M).
+**core-2 is the DEFAULT tier, not core-1.** Anything needing "a Core model" with no
+opinion resolves core-2 first (`DEFAULT_CORE_TIER_ORDER` in the app), so a new user's first
+turn runs on GPT. Slot order remains the display order. The Reviewer is the exception and
+still takes the lowest-numbered tier, which keeps reviews on GLM at roughly 39c each.
+
+**Core no longer has a cheap tier.** GLM 5.3 ($1.40/$4.40) is now the floor; Terra is
+$2.00/$12.00 and Sol $4.00/$20.00, against the DeepSeek V4 Pro they replaced at
+$0.435/$0.87. Measured 2–29c turns become roughly 50c on Terra and 90c on Sol. That is
+deliberate: with the $1 signup trial removed, users fund their own inference.
+
+**The GPT tiers accept image and PDF input** — the first Core models that do. This needs no
+configuration: images were never gated, and the PDF gate reads models.dev per-model and
+resolves through the `openai/` wire-id prefix. GLM 5.3 remains text-only.
+
+**OpenAI rejects `max_tokens`.** Its reasoning models answer
+`400 unsupported_parameter: Use 'max_completion_tokens' instead`, so the proxy renames the
+field for OpenAI-routed tiers only (`sanitizeForDirectProvider`). Every other direct
+provider still wants the classic name — do not widen that rename to `protocol: "openai"`,
+which they all declare.
 
 ## Verifying a model id before you paste it
 
@@ -81,15 +99,42 @@ uses it day to day:
 - `COMPASS_OPENROUTER_API_KEY` still set in Railway. It is no longer required at boot (the
   proxy starts fine without it), so an unrouted tier with no key returns
   `core_unavailable` and alerts, naming this as the cause.
-- A wire id OpenRouter actually recognises. `z-ai/glm-5.3` and
-  `deepseek/deepseek-v4-pro` both qualify — that is why wire ids are kept
+- A wire id OpenRouter actually recognises. `z-ai/glm-5.3`, `openai/gpt-5.6-terra` and
+  `openai/gpt-5.6-sol` all qualify — that is why wire ids are kept
   OpenRouter-valid even though Core no longer routes through it.
 
 Keeping the key is cheap insurance. Dropping it makes rollback a redeploy.
 
+## `cacheHitField`, and why it must be decided at flip time
+
+`cacheHitField` is not how caching happens — the provider caches on its own. It is where
+that provider reports the cache-hit token count so we can bill it at the cheaper
+`cache_read` rate instead of full input. The vendors disagree: DeepSeek puts it top-level
+as `prompt_cache_hit_tokens`, OpenAI-compatible vendors nest it at
+`prompt_tokens_details.cached_tokens`, and some report nothing at all.
+
+`normalizeUsage` tries the configured field, then the OpenAI-standard nested path, then
+zero — and a model with no catalog `cache_read` price falls back *up* to the full input
+rate. So the failure mode is always a silently lost discount, never free tokens.
+
+**Decide it while you have a live response in front of you.** Nothing logs the cached
+token count or a field miss; the per-generation log line carries only a scalar total. Once
+the flip is done there is no way to tell from the outside whether the field is right — the
+only signal is `cents` sitting close to `reserved` on a prompt that should have hit cache.
+
+Every live tier ships `null`, meaning they rely on the OpenAI-standard nested path, and
+**both vendors have now been confirmed against real usage frames** (2026-09-08): Z.ai and
+OpenAI each report `prompt_tokens_details.cached_tokens`. So `null` is correct here and
+cached input is being discounted, not billed at full rate.
+
+`cacheWriteField` stays `null` deliberately. models.dev carries no `cache_write` price for
+these models, and `computeCostUsd` falls back to `max(input, cacheRead, output)` when a
+price is missing — so setting the field would bill cache writes at the OUTPUT rate. Leaving
+it unset bills them as ordinary input, which is the safe direction.
+
 ## `webSearch` is false on every tier
 
-Core has no native web search once it leaves OpenRouter: none of the four providers
+Core has no native web search once it leaves OpenRouter: no provider in the lineup
 offers agentic search over a plain OpenAI-compatible chat endpoint. Core uses the
 client SearxNG tool and the in-app browser instead.
 

@@ -1,6 +1,6 @@
 # Atlarix Releases
 
-This is the **official release repository** for [Atlarix](https://atlarix.dev) — the agent workstation built for the open-weight frontier. Managed cloud models via Atlarix Core, your own API keys across 145+ providers, and local models — deep research, code generation, and debugging without replacing your editor.
+This is the **official release repository** for [Atlarix](https://atlarix.dev) — the private AI workstation. Managed cloud models via Atlarix Core, your own API keys across 145+ providers, and local models — deep research, code generation, and debugging without replacing your editor.
 
 **Main website:** [atlarix.dev](https://atlarix.dev)  
 **Built by:** [Norah Labs](https://norahlabs.com/)
@@ -81,7 +81,8 @@ The models currently powering Atlarix Core:
 | Tier | Model |
 | --- | --- |
 | Core 1 | `z-ai/glm-5.3` |
-| Core 2 | `deepseek/deepseek-v4-pro` |
+| Core 2 | `openai/gpt-5.6-terra` |
+| Core 3 | `openai/gpt-5.6-sol` |
 <!-- CORE_MODELS:END -->
 
 This table is generated from `core-models.json` by a GitHub Action — edit only the JSON and the table updates itself. (No API keys live here; only model identifiers.)

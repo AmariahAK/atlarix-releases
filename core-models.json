@@ -2,28 +2,24 @@
   "version": 1,
   "models": {
     "core-1": "z-ai/glm-5.3",
-    "core-2": "deepseek/deepseek-v4-pro"
+    "core-2": "openai/gpt-5.6-terra",
+    "core-3": "openai/gpt-5.6-sol"
   },
   "webSearch": {
     "core-1": false,
-    "core-2": false
+    "core-2": false,
+    "core-3": false
   },
   "providers": {
-    "deepseek": {
-      "baseUrl": "https://api.deepseek.com",
-      "apiKeyEnv": "DEEPSEEK_API_KEY",
-      "protocol": "openai",
-      "balanceEndpoint": "https://api.deepseek.com/user/balance"
-    },
     "zai": {
       "baseUrl": "https://api.z.ai/api/paas/v4",
       "apiKeyEnv": "ZHIPU_API_KEY",
       "protocol": "openai",
       "balanceEndpoint": null
     },
-    "moonshot": {
-      "baseUrl": "https://api.moonshot.ai/v1",
-      "apiKeyEnv": "MOONSHOT_API_KEY",
+    "openai": {
+      "baseUrl": "https://api.openai.com/v1",
+      "apiKeyEnv": "OPENAI_API_KEY",
       "protocol": "openai",
       "balanceEndpoint": null
     }
@@ -35,9 +31,14 @@
       "cacheHitField": null
     },
     "core-2": {
-      "provider": "deepseek",
-      "apiModelId": "deepseek-v4-pro",
-      "cacheHitField": "prompt_cache_hit_tokens"
+      "provider": "openai",
+      "apiModelId": "gpt-5.6-terra",
+      "cacheHitField": null
+    },
+    "core-3": {
+      "provider": "openai",
+      "apiModelId": "gpt-5.6-sol",
+      "cacheHitField": null
     }
   }
 }
