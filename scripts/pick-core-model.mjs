@@ -10,7 +10,8 @@
  *      case-sensitive: `MiniMax-M3` is not `minimax-m3`.
  *   2. WIRE ID NOT ON OPENROUTER -> an unrouted tier still forwards to OpenRouter, so
  *      the tier is broken before its cutover and has no rollback target after it.
- *      OpenRouter spells Z.ai `z-ai`, and does not carry Kimi K3 at all.
+ *      OpenRouter spells Z.ai `z-ai`. It DOES carry Kimi K3 as `moonshotai/kimi-k3` — an
+ *      earlier note here said otherwise, from a truncated id list that read as absent.
  *
  * Live provider /models is consulted too when a key is present, since a vendor can ship
  * a model before models.dev indexes it — that is exactly the case where you would
@@ -81,6 +82,14 @@ const PROVIDERS = {
     apiKeyEnv: "MINIMAX_API_KEY",
     modelsDevId: "minimax",
     openRouterVendor: "minimax",
+    listPath: "/models",
+  },
+  openai: {
+    label: "OpenAI",
+    baseUrl: "https://api.openai.com/v1",
+    apiKeyEnv: "OPENAI_API_KEY",
+    modelsDevId: "openai",
+    openRouterVendor: "openai",
     listPath: "/models",
   },
 };
