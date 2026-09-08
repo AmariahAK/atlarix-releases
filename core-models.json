@@ -20,7 +20,7 @@
     "openai": {
       "baseUrl": "https://api.openai.com/v1",
       "apiKeyEnv": "OPENAI_API_KEY",
-      "protocol": "openai",
+      "protocol": "openai-responses",
       "balanceEndpoint": null
     }
   },
@@ -33,12 +33,12 @@
     "core-2": {
       "provider": "openai",
       "apiModelId": "gpt-5.6-terra",
-      "cacheHitField": null
+      "cacheHitField": "input_tokens_details.cached_tokens"
     },
     "core-3": {
       "provider": "openai",
       "apiModelId": "gpt-5.6-sol",
-      "cacheHitField": null
+      "cacheHitField": "input_tokens_details.cached_tokens"
     }
   }
 }
