@@ -85,25 +85,46 @@ which they all declare.
 
 `node scripts/pick-core-model.mjs` checks the two things that fail SILENTLY — whether the
 id exists in models.dev (no price row ⇒ that tier bills at its worst-case reserve) and
-whether the wire id exists on OpenRouter (no rollback target). Run
+whether the wire id exists on OpenRouter. That second check is now advisory rather than a
+rollback guarantee — see Rollback below — but it still catches a fabricated id. Run
 `node scripts/pick-core-model.mjs --check` to audit whatever is currently configured; it
 exits non-zero on a problem, so it can gate a deploy.
 
 ## Rollback
 
-Delete that tier's `routing` entry and it reverts to OpenRouter on the next refresh — no
-redeploy, no release.
+**THE OPENROUTER FALLBACK IS GONE (2026-09-08), so the old rollback no longer works.**
+Deleting a tier's `routing` entry used to revert it to OpenRouter on the next refresh.
+`COMPASS_OPENROUTER_API_KEY` has been removed from Railway — it had silently expired, and a
+dead fallback is worse than none: it answered
+`{"error":{"message":"User not found.","code":401}}`, which the client reported to the user
+as their own expired Atlarix session. An unrouted tier now returns `core_unavailable` and
+alerts, which is at least honest.
 
-That path needs two things to actually work, and both are easy to lose now that nothing
-uses it day to day:
-- `COMPASS_OPENROUTER_API_KEY` still set in Railway. It is no longer required at boot (the
-  proxy starts fine without it), so an unrouted tier with no key returns
+Rollback today is a config commit, and it is still fast because this file is served raw
+from `main` with no build step:
+
+- **Wrong model on a tier** — point `models[tier]` and `routing[tier].apiModelId` back.
+- **A provider is down or its key is rejected** — repoint that tier at another provider
+  already in `providers`, or drop the tier from `models` entirely, which every layer reads
+  as EMPTY and which makes clients fall forward to a configured tier rather than fail.
+- **Restoring the OpenRouter path** means setting the key again first. Until then, an
+  unrouted tier does not degrade — it stops.
+
+**That path is now switched off, and the reason is worth keeping.** It needed two things,
+and one of them was lost silently:
+- `COMPASS_OPENROUTER_API_KEY` set in Railway. It stopped being required at boot in July,
+  so nothing failed when it expired — and nothing used it day to day, so nothing noticed.
+  It has been removed deliberately (2026-09-08). An unrouted tier now returns
   `core_unavailable` and alerts, naming this as the cause.
-- A wire id OpenRouter actually recognises. `z-ai/glm-5.3`, `openai/gpt-5.6-terra` and
-  `openai/gpt-5.6-sol` all qualify — that is why wire ids are kept
-  OpenRouter-valid even though Core no longer routes through it.
+- A wire id OpenRouter recognises. `z-ai/glm-5.3`, `openai/gpt-5.6-terra` and
+  `openai/gpt-5.6-sol` all qualify, and wire ids are still kept OpenRouter-valid so the
+  path can be switched back on by setting a key.
 
-Keeping the key is cheap insurance. Dropping it makes rollback a redeploy.
+**The lesson, because it cost a debugging session:** a fallback nothing exercises is not
+insurance, it is an untested branch that will fire exactly once, in production, at the
+worst moment. This one had expired, and it failed with an auth error the client attributed
+to the USER's session. If the OpenRouter path is ever restored, give it a periodic probe —
+or accept that its first real use will also be its first test.
 
 ## `cacheHitField`, and why it must be decided at flip time
 
