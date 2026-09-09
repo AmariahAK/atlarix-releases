@@ -3,7 +3,7 @@
   "models": {
     "core-1": "z-ai/glm-5.3",
     "core-2": "openai/gpt-5.6-terra",
-    "core-3": "openai/gpt-5.6-sol"
+    "core-3": "openai/gpt-6-astra"
   },
   "webSearch": {
     "core-1": false,
@@ -37,7 +37,7 @@
     },
     "core-3": {
       "provider": "openai",
-      "apiModelId": "gpt-5.6-sol",
+      "apiModelId": "gpt-6-astra",
       "cacheHitField": "input_tokens_details.cached_tokens"
     }
   }
