@@ -127,9 +127,9 @@ If you are evaluating Atlarix for a large or multi-repository codebase, this pap
 
 Atlarix is closed-source, but you can contribute to the ecosystem:
 
-**Skills Registry** — Atlarix ships with a community-maintained open-source skill registry. If you build a skill that makes Atlarix better at a language, framework, or workflow pattern, contribute it at:
+**Skills** — A skill is a markdown file in your repo, under `.atlarix/skills/`, that teaches Atlarix a repeatable job: a release checklist, a review rubric, the way your team writes migrations. Atlarix sees each skill's name and description on every turn and reads the whole file only when that job comes up, so a workspace can hold as many as it likes without them costing prompt space.
 
-👉 **[github.com/AmariahAK/atlarix-skills](https://github.com/AmariahAK/atlarix-skills)**
+Write one yourself, or ask Atlarix to write it for you and commit it alongside your project docs. They travel with the repo, so everyone working in it gets the same behaviour — which is why there is no central registry to install from any more: the useful skills turned out to be the ones specific to a codebase, not the generic ones.
 
 **MCP registry** — Curated Model Context Protocol listings for the Atlarix marketplace:
 
