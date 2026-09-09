@@ -82,7 +82,7 @@ The models currently powering Atlarix Core:
 | --- | --- |
 | Core 1 | `z-ai/glm-5.3` |
 | Core 2 | `openai/gpt-5.6-terra` |
-| Core 3 | `openai/gpt-5.6-sol` |
+| Core 3 | `openai/gpt-6-astra` |
 <!-- CORE_MODELS:END -->
 
 This table is generated from `core-models.json` by a GitHub Action — edit only the JSON and the table updates itself. (No API keys live here; only model identifiers.)
