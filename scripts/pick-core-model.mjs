@@ -175,6 +175,25 @@ async function liveModelIds(provider) {
   }
 }
 
+/**
+ * The protocol a provider block should declare.
+ *
+ * READ FROM THE LIVE CONFIG, never hardcoded. This emitted `"protocol": "openai"`
+ * unconditionally, so pasting the snippet over an existing block SILENTLY REVERTED the
+ * `/v1/responses` cutover — the GPT tiers declare `openai-responses`, and dropping back
+ * to `openai` takes away tool-use-with-reasoning without erroring anywhere.
+ */
+function protocolFor(providerId) {
+  try {
+    const cfg = JSON.parse(readFileSync(CORE_MODELS_PATH, "utf8"));
+    const declared = cfg.providers?.[providerId]?.protocol;
+    if (typeof declared === "string" && declared) return declared;
+  } catch {
+    // No config yet, or unreadable — fall through to the plain default.
+  }
+  return "openai";
+}
+
 function configSnippet(providerId, provider, apiModelId, row) {
   const wireId = `${provider.openRouterVendor}/${apiModelId}`;
   // DeepSeek is the only one of the five with a documented cache-hit field today.
@@ -183,7 +202,7 @@ function configSnippet(providerId, provider, apiModelId, row) {
   return [
     `  "models":   { "core-N": "${wireId}" },`,
     `  "routing":  { "core-N": { "provider": "${providerId}", "apiModelId": "${apiModelId}", "cacheHitField": ${cacheHitField} } },`,
-    `  "providers": { "${providerId}": { "baseUrl": "${provider.baseUrl}", "apiKeyEnv": "${provider.apiKeyEnv}", "protocol": "openai", "balanceEndpoint": null } }`,
+    `  "providers": { "${providerId}": { "baseUrl": "${provider.baseUrl}", "apiKeyEnv": "${provider.apiKeyEnv}", "protocol": "${protocolFor(providerId)}", "balanceEndpoint": null } }`,
     row?.limit?.context
       ? `  // context ${fmtCtx(row.limit.context)} · in ${fmtUsd(row.cost?.input)} · out ${fmtUsd(row.cost?.output)} · reasoning ${reasoningSummary(row)}`
       : "",
