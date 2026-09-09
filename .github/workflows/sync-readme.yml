@@ -1,14 +1,18 @@
 name: Sync README Core models
 
-# Keep the README "Atlarix Core models" table in sync with core-models.json,
-# and check that updates.json is something the app can actually show.
+# Three jobs over the two files this repo publishes live:
+#   check-updates      — updates.json is something the app can actually show
+#   check-core-models  — core-models.json describes tiers that can serve and bill
+#   sync               — regenerate the README's Core models table from the JSON
+#
 # core-models.json is the single source of truth; edit only the JSON.
 #
-# updates.json runs on PULL REQUESTS too, unlike the README sync. The sync can
-# only ever be applied after a merge — it rewrites a file — but a malformed
-# updates.json is published the moment it lands on main and every installed
-# client picks it up within the hour, silently showing nothing. That is worth
-# catching before the merge rather than after.
+# The two CHECKS run on PULL REQUESTS; the sync cannot, because it rewrites a
+# file and can only be applied after a merge. That split is the whole point:
+# both JSON files are published the moment they land on main and every installed
+# client picks them up within the hour — a malformed updates.json silently shows
+# nothing, and a bad core-models.json silently bills at the reserve. Neither
+# errors, so both are worth catching before the merge rather than after.
 
 on:
   push:
@@ -18,11 +22,14 @@ on:
       - "updates.json"
       - "scripts/gen-readme-models.mjs"
       - "scripts/check-updates.mjs"
+      - "scripts/pick-core-model.mjs"
       - ".github/workflows/sync-readme.yml"
   pull_request:
     paths:
       - "updates.json"
       - "scripts/check-updates.mjs"
+      - "core-models.json"
+      - "scripts/pick-core-model.mjs"
   workflow_dispatch:
 
 # Per JOB, not workflow-wide: the validator reads a file and needs nothing, and
@@ -49,6 +56,32 @@ jobs:
           node-version: "20"
       - name: Validate updates.json
         run: node scripts/check-updates.mjs
+
+  check-core-models:
+    # The gate this file was missing. `core-models.json` is read by the proxy on a
+    # 10-minute refresh loop, so an edit here goes LIVE to every installed client
+    # with no build, no release and no review step — the same reasoning the
+    # updates.json check is built on, with more at stake, because the failures are
+    # silent: a model id that is absent from models.dev has no price row, so every
+    # request on that tier bills at its worst-case RESERVE instead of actual cost,
+    # indefinitely, and nothing errors.
+    #
+    # Needs no secrets. models.dev and OpenRouter's catalogs are public; the
+    # script's optional live provider `/models` consult simply skips without keys.
+    #
+    # If this goes red without a config change, read the log before assuming the
+    # JSON is wrong: the audit fetches models.dev, and it fails closed on a
+    # sustained outage rather than passing with a warning.
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Audit core-models.json
+        run: node scripts/pick-core-model.mjs --check
 
   sync:
     # Only after a merge: this job rewrites README.md and pushes.
