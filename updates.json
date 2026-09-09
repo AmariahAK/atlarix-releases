@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "id": "14.45.0",
+      "title": "The app is free, and skills live in your repo",
+      "body": "Every feature is free — you pay only for Atlarix Core inference. Skills are now markdown files in your project's .atlarix/skills/, and a cancelled turn bills only for what it produced.",
+      "link": "https://www.atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
       "id": "14.42.0",
       "title": "Talk to Atlarix while it is working",
       "body": "A message you type mid-turn now reaches the turn that is running, instead of waiting for it to end. Type as many as you like — each one is cancellable until it is picked up.",
