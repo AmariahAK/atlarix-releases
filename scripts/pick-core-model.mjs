@@ -114,10 +114,41 @@ function loadEnvFile(file) {
 }
 if (envFileArg) loadEnvFile(path.resolve(envFileArg.slice("--env-file=".length)));
 
+/**
+ * Fetch JSON, retrying a transient failure a couple of times.
+ *
+ * `--check` runs in CI as a merge gate, so the failure mode to avoid is a red X
+ * that has nothing to do with the change: models.dev being briefly unreachable
+ * would otherwise block a merge and, worse, train people to ignore this check.
+ *
+ * It still fails CLOSED on a sustained outage rather than passing with a warning.
+ * The thing being guarded is a bad `core-models.json` reaching every installed
+ * client live on merge, with no build and no review — missing that is far worse
+ * than a red check somebody re-runs.
+ */
 async function fetchJson(url, headers = {}) {
-  const res = await fetch(url, { headers: { Accept: "application/json", ...headers } });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  const attempts = 3;
+  let lastError;
+  for (let i = 0; i < attempts; i++) {
+    if (i > 0) await new Promise((r) => setTimeout(r, 1000 * i));
+    let res;
+    try {
+      res = await fetch(url, {
+        headers: { Accept: "application/json", ...headers },
+      });
+    } catch (e) {
+      lastError = e; // transport-level — worth another attempt
+      continue;
+    }
+    if (res.ok) return res.json();
+    // A 4xx other than 429 is the answer, not a blip: retrying a 401 or a 404
+    // wastes time and reports the wrong cause.
+    if (res.status < 500 && res.status !== 429) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+    lastError = new Error(`HTTP ${res.status}`);
+  }
+  throw lastError;
 }
 
 /** models.dev rows for one provider, keyed by the vendor's own model id. */
