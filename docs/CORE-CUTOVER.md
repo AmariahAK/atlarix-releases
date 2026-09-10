@@ -47,11 +47,20 @@ proxy.
 
 ## The lineup
 
-| Slot | Model | Provider | Wire id | models.dev id | Key |
-|---|---|---|---|---|---|
-| core-1 | GLM 5.3 | `zai` | `z-ai/glm-5.3` | `glm-5.3` | `ZHIPU_API_KEY` |
-| core-2 | GPT 5.6 Terra | `openai` | `openai/gpt-5.6-terra` | `gpt-5.6-terra` | `OPENAI_API_KEY` |
-| core-3 | GPT 5.6 Sol | `openai` | `openai/gpt-5.6-sol` | `gpt-5.6-sol` | `OPENAI_API_KEY` |
+<!-- CORE_ROUTING:START (auto-generated from core-models.json — do not edit by hand) -->
+| Slot | Provider | Wire id | API model id | Key |
+| --- | --- | --- | --- | --- |
+| core-1 | `zai` | `z-ai/glm-5.3` | `glm-5.3` | `ZHIPU_API_KEY` |
+| core-2 | `openai` | `openai/gpt-5.6-terra` | `gpt-5.6-terra` | `OPENAI_API_KEY` |
+| core-3 | `openai` | `openai/gpt-6-astra` | `gpt-6-astra` | `OPENAI_API_KEY` |
+<!-- CORE_ROUTING:END -->
+
+The **API model id** column is what the provider is actually called with; the **wire id**
+is what the app and models.dev know the model by. This table used to be typed by hand and
+went stale exactly the way you would expect — it named `openai/gpt-5.6-sol` for core-3 for
+days after the JSON had moved to a GPT-6. It is now rendered from `core-models.json` by
+`scripts/gen-readme-models.mjs`, which the sync job runs on every merge that touches the
+JSON — so the only way to change this table is to change the config it describes.
 
 All on PAYG APIs — a Z.ai *coding plan* is a different base URL
 (`.../api/coding/paas/v4`), so do not mix them up.

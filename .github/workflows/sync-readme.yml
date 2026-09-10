@@ -1,10 +1,10 @@
-name: Sync README Core models
+name: Sync generated tables
 
 # Three jobs over the two files this repo publishes live:
 #   check-updates      — updates.json is something the app can actually show
 #   check-core-models  — core-models.json describes tiers that can serve and bill
 #   check-site-lineup  — atlarix.dev is actually SERVING the lineup we publish
-#   sync               — regenerate the README's Core models table + catalogue counts
+#   sync               — regenerate the generated tables + the README catalogue counts
 #
 # core-models.json is the single source of truth; edit only the JSON.
 #
@@ -121,7 +121,7 @@ jobs:
         run: node scripts/check-site-lineup.mjs
 
   sync:
-    # Only after a merge: this job rewrites README.md and pushes.
+    # Only after a merge: this job rewrites the generated files and pushes.
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
@@ -133,7 +133,7 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Regenerate README table from core-models.json
+      - name: Regenerate the Core tables from core-models.json
         run: node scripts/gen-readme-models.mjs
 
       # Fails SOFT by design: an unreachable models.dev leaves the README untouched
@@ -142,14 +142,20 @@ jobs:
       - name: Refresh README catalogue counts from models.dev
         run: node scripts/gen-readme-catalog.mjs
 
+      # Three generated files now, not one: the Core lineup table moved to
+      # docs/CORE-MODELS.md, the routing table in docs/CORE-CUTOVER.md is generated
+      # too (it was hand-typed and drifted), and README.md still carries the
+      # models.dev catalogue counts inline. Naming them explicitly rather than
+      # committing everything keeps this job unable to push an unrelated change.
       - name: Commit if changed
         run: |
-          if [[ -n "$(git status --porcelain README.md)" ]]; then
+          FILES=(README.md docs/CORE-MODELS.md docs/CORE-CUTOVER.md)
+          if [[ -n "$(git status --porcelain -- "${FILES[@]}")" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add README.md
-            git commit -m "chore: sync Core models table from core-models.json [skip ci]"
+            git add -- "${FILES[@]}"
+            git commit -m "chore: sync generated tables from core-models.json [skip ci]"
             git push
           else
-            echo "README.md already in sync."
+            echo "Generated tables already in sync."
           fi
