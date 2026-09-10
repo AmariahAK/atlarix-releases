@@ -3,6 +3,7 @@ name: Sync README Core models
 # Three jobs over the two files this repo publishes live:
 #   check-updates      — updates.json is something the app can actually show
 #   check-core-models  — core-models.json describes tiers that can serve and bill
+#   check-site-lineup  — atlarix.dev is actually SERVING the lineup we publish
 #   sync               — regenerate the README's Core models table from the JSON
 #
 # core-models.json is the single source of truth; edit only the JSON.
@@ -23,6 +24,7 @@ on:
       - "scripts/gen-readme-models.mjs"
       - "scripts/check-updates.mjs"
       - "scripts/pick-core-model.mjs"
+      - "scripts/check-site-lineup.mjs"
       - ".github/workflows/sync-readme.yml"
   pull_request:
     paths:
@@ -82,6 +84,34 @@ jobs:
           node-version: "20"
       - name: Audit core-models.json
         run: node scripts/pick-core-model.mjs --check
+
+  check-site-lineup:
+    # AFTER THE MERGE ONLY, and it is the one job here that asserts on something
+    # outside this repo.
+    #
+    # core-models.json goes live to every installed client within the hour. The
+    # marketing site cannot: it is statically generated, so it only tells the truth
+    # once atlarix-launchpad regenerates its derived lineup and redeploys. Nothing
+    # connects those two events, so the site can go on naming a model that is no
+    # longer served — which it did, advertising "GLM 5.3 and GPT 5.6" while three
+    # slots were mapped and one was a GPT-6.
+    #
+    # Not on pull_request: the site necessarily still serves the OLD lineup while a
+    # change is in review, so it would fail every such PR for being correct.
+    #
+    # A red run here does NOT mean this repo is wrong — it means the launchpad owes
+    # a redeploy, and the failure message says so.
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Is atlarix.dev serving this lineup?
+        run: node scripts/check-site-lineup.mjs
 
   sync:
     # Only after a merge: this job rewrites README.md and pushes.
