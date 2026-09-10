@@ -4,7 +4,7 @@
     {
       "id": "14.45.0",
       "title": "The app is free, and skills live in your repo",
-      "body": "Every feature is available on every plan, and Atlarix Core inference is what's metered. Skills are now markdown files in your project's .atlarix/skills/, and a cancelled turn bills only for what it produced.",
+      "body": "Every feature is on every plan; Atlarix Core inference is what's metered. Skills are now markdown files in your project's .atlarix/skills/, and a cancelled turn bills only what it produced.",
       "link": "https://www.atlarix.dev/changelog",
       "linkLabel": "What's new"
     },
