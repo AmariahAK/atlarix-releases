@@ -4,7 +4,7 @@ name: Sync README Core models
 #   check-updates      — updates.json is something the app can actually show
 #   check-core-models  — core-models.json describes tiers that can serve and bill
 #   check-site-lineup  — atlarix.dev is actually SERVING the lineup we publish
-#   sync               — regenerate the README's Core models table from the JSON
+#   sync               — regenerate the README's Core models table + catalogue counts
 #
 # core-models.json is the single source of truth; edit only the JSON.
 #
@@ -22,6 +22,7 @@ on:
       - "core-models.json"
       - "updates.json"
       - "scripts/gen-readme-models.mjs"
+      - "scripts/gen-readme-catalog.mjs"
       - "scripts/check-updates.mjs"
       - "scripts/pick-core-model.mjs"
       - "scripts/check-site-lineup.mjs"
@@ -32,6 +33,12 @@ on:
       - "scripts/check-updates.mjs"
       - "core-models.json"
       - "scripts/pick-core-model.mjs"
+  # Weekly, because two of these jobs assert on things that move without anyone
+  # touching this repo: the models.dev catalogue size in the README, and whether
+  # atlarix.dev is still serving the lineup we publish. Both would otherwise only be
+  # re-checked when core-models.json happens to change.
+  schedule:
+    - cron: "17 6 * * 1"
   workflow_dispatch:
 
 # Per JOB, not workflow-wide: the validator reads a file and needs nothing, and
@@ -128,6 +135,12 @@ jobs:
 
       - name: Regenerate README table from core-models.json
         run: node scripts/gen-readme-models.mjs
+
+      # Fails SOFT by design: an unreachable models.dev leaves the README untouched
+      # and exits 0. A docs refresher that can break CI because a third party is down
+      # is a docs refresher someone eventually deletes.
+      - name: Refresh README catalogue counts from models.dev
+        run: node scripts/gen-readme-catalog.mjs
 
       - name: Commit if changed
         run: |

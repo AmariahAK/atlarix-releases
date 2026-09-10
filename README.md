@@ -1,6 +1,6 @@
 # Atlarix Releases
 
-This is the **official release repository** for [Atlarix](https://atlarix.dev) — the private AI workstation. Managed cloud models via Atlarix Core, your own API keys across 145+ providers, and local models — deep research, code generation, and debugging without replacing your editor.
+This is the **official release repository** for [Atlarix](https://atlarix.dev) — the private AI workstation. Managed cloud models via Atlarix Core, your own API keys across <!-- CATALOG_COUNTS:START (auto-generated from models.dev — do not edit by hand) -->210+ providers and 6,500+ tool-capable models<!-- CATALOG_COUNTS:END -->, and local models — deep research, code generation, and debugging without replacing your editor.
 
 **Main website:** [atlarix.dev](https://atlarix.dev)  
 **Built by:** [Norah Labs](https://norahlabs.com/)
@@ -13,63 +13,18 @@ This is the **official release repository** for [Atlarix](https://atlarix.dev) �
 - **Releases:** Official binaries (macOS, Linux, **Windows**) are published here via GitHub Actions from the main Atlarix app repository. *Windows builds are currently **unsigned** (EV/OV code signing is in progress) — Windows Defender SmartScreen will show a warning before install; this is expected. Click "More info" → "Run anyway" to proceed.*
 - **Community:** You can open **Issues** for bug reports and **Discussions** (if enabled) for ideas and feedback.
 
-## Headless agent (benchmarking / CI)
+## Headless agent (CLI)
 
-Most users want the desktop app above. If you want to **run the Atlarix agent from the command line** — for benchmarking (Terminal-Bench, SWE-bench), CI, or unattended tasks — there's a prebuilt headless bundle.
-
-- **Download:** [`atlarix-headless-<version>.tar.gz`](https://github.com/AmariahAK/atlarix-releases/releases/tag/headless-bench) from the **headless-bench** release. It's an Electron-free Node bundle (`linux/amd64`, runtime-only) that drives the real agent loop. Requires **Node 20+**.
-- **Unpack:** `mkdir -p /opt/atlarix && tar -xzf atlarix-headless-*.tar.gz -C /opt/atlarix`
-
-**Run a task** against a provider's own API — the recommended path, and the one Atlarix
-Core itself uses. Use your key straight from the provider; note the model id here is the
-vendor's own (`deepseek-v4-pro`), not a gateway-prefixed one:
+The Atlarix agent loop as a command-line tool — for benchmarks, CI and unattended runs.
+Install it from npm:
 
 ```bash
-export DEEPSEEK_API_KEY="sk-..."
-node /opt/atlarix/dist-headless/atlarix-headless.mjs \
-  --workspace /path/to/repo \
-  --prompt-file task.md \
-  --provider-url https://api.deepseek.com \
-  --model deepseek-v4-pro \
-  --api-key "$DEEPSEEK_API_KEY"
+npm install -g atlarix
 ```
 
-The same shape works for any OpenAI-compatible endpoint — swap the base URL and model:
-
-| Provider | `--provider-url` | `--model` |
-| --- | --- | --- |
-| DeepSeek | `https://api.deepseek.com` | `deepseek-v4-pro` |
-| Z.ai (GLM) | `https://api.z.ai/api/paas/v4` | `glm-5.3` |
-| Moonshot (Kimi) | `https://api.moonshot.ai/v1` | `kimi-k3` |
-| Local Ollama | `http://localhost:11434/v1` | whatever you have pulled |
-
-**Or through OpenRouter**, pinned to one provider — useful when a comparison needs
-byte-identical weights and precision across runs:
-
-```bash
-export OPENROUTER_API_KEY="sk-or-v1-..."
-node /opt/atlarix/dist-headless/atlarix-headless.mjs \
-  --workspace /path/to/repo \
-  --prompt-file task.md \
-  --provider-id openrouter \
-  --model deepseek/deepseek-v4-pro \
-  --api-key "$OPENROUTER_API_KEY" \
-  --openrouter-provider '{"order":["deepinfra"],"allow_fallbacks":false}'
-```
-
-| Flag | Env var | Default | Notes |
-| --- | --- | --- | --- |
-| `--workspace <dir>` | — | cwd | Repo to work on |
-| `--prompt <text>` / `--prompt-file <path>` | `ATLARIX_HEADLESS_PROMPT` | — | The task (one is required) |
-| `--provider-id <id>` | `ATLARIX_HEADLESS_PROVIDER_ID` | `openrouter` | Built-in provider |
-| `--provider-url <url>` | `ATLARIX_HEADLESS_PROVIDER_URL` | — | Custom OpenAI-compatible base URL |
-| `--model <name>` | `ATLARIX_HEADLESS_MODEL` | `deepseek/deepseek-v4-pro` | Model id |
-| `--api-key <key>` | `ATLARIX_HEADLESS_API_KEY` | — | Provider key (plaintext) |
-| `--openrouter-provider <json>` | `ATLARIX_OPENROUTER_PROVIDER_JSON` | — | OpenRouter routing pin (OpenRouter only) |
-| `--mode build\|ask` | — | `build` | `build` = autonomous coding, `ask` = read-only |
-| `--timeout <ms>` | `ATLARIX_HEADLESS_TIMEOUT_MS` | `600000` | Wall-clock timeout |
-
-Exit code **0** = the agent completed the turn; **1** = timeout/error; **2** = bad arguments. The headless bundle auto-approves file/command operations (it's unattended), forces native function-calling, and drops browser tools.
+**→ [Full guide: docs/HEADLESS.md](docs/HEADLESS.md)** — install (npm or Linux tarball),
+every flag, and the two settings that quietly decide whether a benchmark number means
+anything.
 
 ## Atlarix Core models
 
@@ -105,8 +60,8 @@ Keep `body` to a line or two. The moment it wants scrolling it has become the ch
 
 - [Atlarix](https://atlarix.dev) — product and download page  
 - [Norah Labs](https://norahlabs.com/) — builders of Atlarix  
-- [Security policy](SECURITY.md) — how to report vulnerabilities  
-- [License](LICENSE) — end-user license agreement  
+- [Security policy](docs/SECURITY.md) — how to report vulnerabilities  
+- [License](docs/LICENSE.md) — end-user license agreement  
 
 ## Research
 
