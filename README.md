@@ -14,7 +14,7 @@ disk without your approval.
 **Atlarix is free.** Every feature is available to everyone; what you pay for is Atlarix
 Core inference, metered as you use it. Run a model three ways — **Atlarix Core** (managed,
 routed through our proxy: not logged, not retained), **your own API key** across
-<!-- CATALOG_COUNTS:START (auto-generated from models.dev — do not edit by hand) -->210+ providers and 6,500+ tool-capable models<!-- CATALOG_COUNTS:END -->,
+<!-- CATALOG_COUNTS:START (auto-generated from models.dev — do not edit by hand) -->220+ providers and 6,500+ tool-capable models<!-- CATALOG_COUNTS:END -->,
 or a **local model** via Ollama or LM Studio. The last two never touch our
 infrastructure, and are metered by nobody.
 
