@@ -51,7 +51,7 @@ proxy.
 | Slot | Provider | Wire id | API model id | Key |
 | --- | --- | --- | --- | --- |
 | core-1 | `zai` | `z-ai/glm-5.3` | `glm-5.3` | `ZHIPU_API_KEY` |
-| core-2 | `openai` | `openai/gpt-5.6-terra` | `gpt-5.6-terra` | `OPENAI_API_KEY` |
+| core-2 | `openai` | `openai/gpt-6-sol` | `gpt-6-sol` | `OPENAI_API_KEY` |
 | core-3 | `openai` | `openai/gpt-6-astra` | `gpt-6-astra` | `OPENAI_API_KEY` |
 <!-- CORE_ROUTING:END -->
 
