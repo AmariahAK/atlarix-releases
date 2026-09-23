@@ -94,7 +94,7 @@
     "newUserDays": 7,
     "releaseHours": 3,
     "paid": {
-      "mode": "shadow",
+      "mode": "on",
       "shadowTier": "core-2",
       "order": [
         "luna",
