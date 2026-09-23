@@ -22,6 +22,12 @@
       "apiKeyEnv": "OPENAI_API_KEY",
       "protocol": "openai-responses",
       "balanceEndpoint": null
+    },
+    "openai-shared": {
+      "baseUrl": "https://api.openai.com/v1",
+      "apiKeyEnv": "OPENAI_SHARED_API_KEY",
+      "protocol": "openai-responses",
+      "balanceEndpoint": null
     }
   },
   "routing": {
@@ -40,5 +46,51 @@
       "apiModelId": "gpt-6-astra",
       "cacheHitField": "input_tokens_details.cached_tokens"
     }
+  },
+  "auto": {
+    "id": "atlarix/auto",
+    "label": "Atlarix Auto",
+    "chain": [
+      {
+        "provider": "openai-shared",
+        "apiModelId": "gpt-5.4-mini",
+        "pool": "mini"
+      },
+      {
+        "provider": "openai-shared",
+        "apiModelId": "gpt-5-mini",
+        "pool": "mini"
+      },
+      {
+        "provider": "openai-shared",
+        "apiModelId": "gpt-5.4",
+        "pool": "large",
+        "noTools": true
+      },
+      {
+        "provider": "zai",
+        "apiModelId": "glm-4.7-flash",
+        "pool": "floor",
+        "concurrency": 1
+      }
+    ],
+    "pools": {
+      "mini": {
+        "tier12": 2500000,
+        "tier35": 10000000
+      },
+      "large": {
+        "tier12": 250000,
+        "tier35": 1000000
+      }
+    },
+    "usageTier": 1,
+    "cutoff": 0.9,
+    "floorTokens": 50000,
+    "ceilingTokens": 600000,
+    "floorCeilingTokens": 2000000,
+    "newUserMultiplier": 2,
+    "newUserDays": 7,
+    "releaseHours": 3
   }
 }
