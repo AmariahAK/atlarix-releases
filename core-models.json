@@ -92,6 +92,152 @@
     "floorCeilingTokens": 2000000,
     "newUserMultiplier": 2,
     "newUserDays": 7,
-    "releaseHours": 3
+    "releaseHours": 3,
+    "paid": {
+      "mode": "shadow",
+      "shadowTier": "core-2",
+      "order": [
+        "luna",
+        "glm",
+        "sol",
+        "astra"
+      ],
+      "levels": {
+        "luna": [
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6-luna"
+          },
+          {
+            "provider": "zai",
+            "apiModelId": "glm-5.3-flash"
+          }
+        ],
+        "glm": [
+          {
+            "provider": "zai",
+            "apiModelId": "glm-5.3"
+          },
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6-sol"
+          }
+        ],
+        "sol": [
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6-sol"
+          },
+          {
+            "provider": "zai",
+            "apiModelId": "glm-5.3"
+          }
+        ],
+        "astra": [
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6-astra"
+          },
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6-sol"
+          },
+          {
+            "provider": "zai",
+            "apiModelId": "glm-5.3"
+          }
+        ]
+      },
+      "lanes": {
+        "build": {
+          "off": [
+            "glm",
+            "low"
+          ],
+          "on": [
+            "sol",
+            "medium"
+          ]
+        },
+        "debug": {
+          "off": [
+            "glm",
+            "low"
+          ],
+          "on": [
+            "sol",
+            "medium"
+          ]
+        },
+        "explore": {
+          "off": [
+            "glm",
+            "none"
+          ],
+          "on": [
+            "glm",
+            "medium"
+          ]
+        },
+        "plan": {
+          "off": [
+            "sol",
+            "medium"
+          ],
+          "on": [
+            "astra",
+            "high"
+          ]
+        },
+        "review": {
+          "off": [
+            "sol",
+            "medium"
+          ],
+          "on": [
+            "astra",
+            "high"
+          ]
+        },
+        "subagent": {
+          "off": [
+            "luna",
+            "low"
+          ],
+          "on": [
+            "glm",
+            "medium"
+          ]
+        },
+        "title": {
+          "off": [
+            "luna",
+            "none"
+          ],
+          "pinned": true
+        },
+        "compaction": {
+          "off": [
+            "luna",
+            "low"
+          ],
+          "pinned": true
+        },
+        "summary": {
+          "off": [
+            "luna",
+            "low"
+          ],
+          "pinned": true
+        },
+        "transcribe": {
+          "off": [
+            "luna",
+            "none"
+          ],
+          "pinned": true
+        }
+      }
+    }
   }
 }
