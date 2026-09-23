@@ -71,7 +71,8 @@
         "provider": "zai",
         "apiModelId": "glm-4.7-flash",
         "pool": "floor",
-        "concurrency": 1
+        "concurrency": 1,
+        "textOnly": true
       }
     ],
     "pools": {
