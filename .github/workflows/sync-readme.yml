@@ -3,6 +3,7 @@ name: Sync generated tables
 # Three jobs over the two files this repo publishes live:
 #   check-updates      — updates.json is something the app can actually show
 #   check-core-models  — core-models.json describes tiers that can serve and bill
+#   sync-site-lineup   — regenerate + push atlarix-launchpad's derived lineup
 #   check-site-lineup  — atlarix.dev is actually SERVING the lineup we publish
 #   sync               — regenerate the generated tables + the README catalogue counts
 #
@@ -92,6 +93,57 @@ jobs:
       - name: Audit core-models.json
         run: node scripts/pick-core-model.mjs --check
 
+  sync-site-lineup:
+    # AUTOMATES WHAT check-site-lineup USED TO ASK A HUMAN TO DO. After a merge,
+    # regenerate atlarix-launchpad's derived lineup from the JSON that just landed
+    # and push it; the push is what redeploys the site (Vercel's git integration,
+    # not Actions — so the launchpad being private costs no Actions minutes).
+    #
+    # Authenticates with a DEPLOY KEY scoped to atlarix-launchpad alone
+    # (secret LAUNCHPAD_DEPLOY_KEY) — write access to one repo, nothing else.
+    # Commits only the one generated file, so it cannot push anything else.
+    # Without the secret it skips cleanly and check-site-lineup reports as before.
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      pushed: ${{ steps.push.outputs.pushed }}
+    steps:
+      - name: Deploy key present?
+        id: key
+        env:
+          KEY: ${{ secrets.LAUNCHPAD_DEPLOY_KEY }}
+        run: |
+          if [[ -n "$KEY" ]]; then echo "ok=true" >> "$GITHUB_OUTPUT"; else echo "::warning::LAUNCHPAD_DEPLOY_KEY is not set — the site lineup will not auto-sync."; fi
+      - uses: actions/checkout@v4
+        if: steps.key.outputs.ok == 'true'
+        with:
+          repository: AmariahAK/atlarix-launchpad
+          ssh-key: ${{ secrets.LAUNCHPAD_DEPLOY_KEY }}
+          path: launchpad
+      - uses: actions/setup-node@v4
+        if: steps.key.outputs.ok == 'true'
+        with:
+          node-version: "20"
+      - name: Regenerate the site's Core lineup and push if it changed
+        id: push
+        if: steps.key.outputs.ok == 'true'
+        working-directory: launchpad
+        run: |
+          node scripts/gen-core-lineup.mjs
+          FILE=src/data/core-lineup.generated.json
+          if [[ -n "$(git status --porcelain -- "$FILE")" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -- "$FILE"
+            git commit -m "chore: refresh Core lineup from core-models.json"
+            git push
+            echo "pushed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Site lineup already in sync."
+          fi
+
   check-site-lineup:
     # AFTER THE MERGE ONLY, and it is the one job here that asserts on something
     # outside this repo.
@@ -108,7 +160,11 @@ jobs:
     #
     # A red run here does NOT mean this repo is wrong — it means the launchpad owes
     # a redeploy, and the failure message says so.
+    #
+    # Runs AFTER sync-site-lineup. When that job just pushed, the site is mid-
+    # redeploy, so the check retries for up to ~10 minutes before calling it.
     if: github.event_name != 'pull_request'
+    needs: sync-site-lineup
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -118,7 +174,16 @@ jobs:
         with:
           node-version: "20"
       - name: Is atlarix.dev serving this lineup?
-        run: node scripts/check-site-lineup.mjs
+        env:
+          JUST_PUSHED: ${{ needs.sync-site-lineup.outputs.pushed }}
+        run: |
+          tries=1
+          [[ "$JUST_PUSHED" == "true" ]] && tries=20
+          for i in $(seq 1 "$tries"); do
+            if node scripts/check-site-lineup.mjs; then exit 0; fi
+            [[ "$i" -lt "$tries" ]] && { echo "Site not updated yet (attempt $i/$tries) — waiting for the redeploy."; sleep 30; }
+          done
+          exit 1
 
   sync:
     # Only after a merge: this job rewrites the generated files and pushes.
