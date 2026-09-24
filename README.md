@@ -11,9 +11,10 @@ your editor.
 no embeddings are built, no file contents are sent as telemetry, and nothing changes on
 disk without your approval.
 
-**Atlarix is free.** Every feature is available to everyone; what you pay for is Atlarix
-Core inference, metered as you use it. Run a model three ways — **Atlarix Core** (managed,
-routed through our proxy: not logged, not retained), **your own API key** across
+**Atlarix is free.** Every feature is available to everyone. Start with **Atlarix Auto**,
+which picks the best AI for each step of the job — no model to choose and no key to set up.
+Or pick a model yourself: **Atlarix Core** (managed, routed through our proxy: not logged,
+not retained), **your own API key** across
 <!-- CATALOG_COUNTS:START (auto-generated from models.dev — do not edit by hand) -->220+ providers and 7,000+ tool-capable models<!-- CATALOG_COUNTS:END -->,
 or a **local model** via Ollama or LM Studio. The last two never touch our
 infrastructure, and are metered by nobody.
