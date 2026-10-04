@@ -15,7 +15,7 @@ models behind them.
 | Tier | Model |
 | --- | --- |
 | Core 1 | `z-ai/glm-5.3` |
-| Core 2 | `openai/gpt-6-sol` |
+| Core 2 | `openai/gpt-6.1-sol` |
 | Core 3 | `openai/gpt-6-astra` |
 <!-- CORE_MODELS:END -->
 
