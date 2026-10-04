@@ -2,7 +2,7 @@
   "version": 1,
   "models": {
     "core-1": "z-ai/glm-5.3",
-    "core-2": "openai/gpt-6-sol",
+    "core-2": "openai/gpt-6.1-sol",
     "core-3": "openai/gpt-6-astra"
   },
   "webSearch": {
@@ -38,7 +38,7 @@
     },
     "core-2": {
       "provider": "openai",
-      "apiModelId": "gpt-6-sol",
+      "apiModelId": "gpt-6.1-sol",
       "cacheHitField": "input_tokens_details.cached_tokens"
     },
     "core-3": {
@@ -120,13 +120,13 @@
           },
           {
             "provider": "openai",
-            "apiModelId": "gpt-6-sol"
+            "apiModelId": "gpt-6.1-sol"
           }
         ],
         "sol": [
           {
             "provider": "openai",
-            "apiModelId": "gpt-6-sol"
+            "apiModelId": "gpt-6.1-sol"
           },
           {
             "provider": "zai",
@@ -140,7 +140,7 @@
           },
           {
             "provider": "openai",
-            "apiModelId": "gpt-6-sol"
+            "apiModelId": "gpt-6.1-sol"
           },
           {
             "provider": "zai",
@@ -239,5 +239,14 @@
         }
       }
     }
+  },
+  "modelEfforts": {
+    "gpt-6.1-sol": [
+      "low",
+      "medium",
+      "high",
+      "xhigh",
+      "max"
+    ]
   }
 }
