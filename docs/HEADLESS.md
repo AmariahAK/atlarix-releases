@@ -1,25 +1,28 @@
-# Atlarix headless agent
+# Atlarix CLI
 
-The Atlarix agent loop as a command-line tool — for benchmarks (Terminal-Bench, SWE-bench),
-CI, and unattended tasks. It is the *same* agent the desktop app runs, with Electron
-stubbed out; it is not a reduced or reimplemented version.
+The Atlarix coding agent in your terminal. Run `atlarix` in a project folder for the
+interactive agent, which shares the desktop app's sessions, keys and settings; or
+`atlarix run` for unattended work: CI, scripts and benchmarks (Terminal-Bench, SWE-bench).
+It is the *same* agent the desktop app runs, not a reduced or reimplemented version.
 
-Most people want [the desktop app](https://atlarix.dev) instead. This is for running the
-agent without a screen.
+Overview and FAQ: [atlarix.dev/cli](https://atlarix.dev/cli).
 
 ---
 
 ## Install
 
-### npm (recommended)
+### Installer, Homebrew or npm
 
 ```bash
-npm install -g atlarix
+curl -fsSL https://atlarix.dev/install | sh          # macOS, Linux
+irm https://atlarix.dev/install.ps1 | iex             # Windows (PowerShell)
+brew install amariahak/atlarix/atlarix                # Homebrew
+npm install -g atlarix                                # npm (needs Node 20+)
 atlarix --version
 ```
 
-Published to npm on every release. Works on **macOS, Linux and Windows**, and puts an
-`atlarix` binary on your `PATH`. Requires **Node 20+**.
+Every route installs the same self-contained binary, published on every release for macOS,
+Linux (glibc and musl) and Windows.
 
 ### Tarball (Linux, no npm)
 

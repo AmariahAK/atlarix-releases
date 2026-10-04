@@ -24,6 +24,47 @@ infrastructure, and are metered by nobody.
 
 ---
 
+## The Atlarix family
+
+| | What it is | Get it |
+| --- | --- | --- |
+| **Desktop app** | The agent workstation for macOS, Linux and Windows | [atlarix.dev](https://atlarix.dev) |
+| **[Atlarix CLI](https://atlarix.dev/cli)** | The same agent in your terminal, sharing the app's sessions, keys and settings; `atlarix run` for CI and scripts | see below |
+| **[Cloud agent](https://atlarix.dev/cloud-agent)** | Ask from Slack or the web; Atlarix works in your repository's own GitHub Actions and opens a pull request | [atlarix.dev/cloud](https://atlarix.dev/cloud) · [the Action](https://github.com/AmariahAK/atlarix-agent-action) |
+| **[Atlarix Reviewer](https://atlarix.dev/reviewer)** | Reviews pull requests on GitHub; reads the diff, never runs your code | [atlarix.dev/reviewer](https://atlarix.dev/reviewer) |
+| **[Chrome extension](https://atlarix.dev/extension)** | Lets the agent open and test pages in your own browser | Chrome Web Store |
+
+### Install the CLI
+
+```bash
+curl -fsSL https://atlarix.dev/install | sh          # macOS, Linux
+irm https://atlarix.dev/install.ps1 | iex             # Windows (PowerShell)
+brew install amariahak/atlarix/atlarix                # Homebrew
+npm install -g atlarix                                # npm
+```
+
+Then run `atlarix` in any project folder. winget (`AmariahAK.AtlarixCLI`) is in review.
+
+## FAQ
+
+**What is Atlarix?** An AI coding agent: it plans, builds, reviews and tests code with you. It
+runs as a desktop app, a terminal CLI, a cloud agent in GitHub Actions, and a pull-request
+reviewer.
+
+**Which models does it use?** Any. Atlarix Auto picks the model for each kind of step, or you
+choose a Core model, your own API key (Anthropic, OpenAI, DeepSeek, OpenRouter and many more),
+or a local model through Ollama or LM Studio.
+
+**Is it free?** Every feature is free. You pay only for Atlarix-hosted models (Pro or credit);
+your own key and local models cost nothing on Atlarix's side.
+
+**Does my code leave my machine?** Not to Atlarix: nothing indexes your repository and no file
+contents are sent as telemetry. Prompts go only to the model you chose.
+
+**How is the cloud agent different from the CLI?** The cloud agent runs unattended in your
+repository's GitHub Actions and comes back as a pull request; the CLI works with you
+interactively in your terminal.
+
 ## What this repo is
 
 This is the **official release repository** — the download centre, not the source. The
@@ -49,7 +90,7 @@ notes.
 | | |
 | --- | --- |
 | [**Core models**](docs/CORE-MODELS.md) | The current Core lineup, and why a slot is not a model |
-| [**Headless agent (CLI)**](docs/HEADLESS.md) | `npm install -g atlarix` — every flag, and the two settings that decide whether a benchmark number means anything |
+| [**Atlarix CLI**](docs/HEADLESS.md) | Install routes, `atlarix run` for CI and benchmarks, every flag |
 | [**Research & benchmarks**](docs/RESEARCH.md) | The Zenodo paper, and where the real benchmark numbers live |
 | [**Contributing**](CONTRIBUTING.md) | Skills, the MCP registry, and what this repo is not |
 | [**Security policy**](docs/SECURITY.md) | How to report a vulnerability |
