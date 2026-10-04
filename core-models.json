@@ -152,37 +152,37 @@
         "build": {
           "off": [
             "glm",
-            "low"
+            "high"
           ],
           "on": [
             "sol",
-            "medium"
+            "high"
           ]
         },
         "debug": {
           "off": [
             "glm",
-            "low"
+            "high"
           ],
           "on": [
             "sol",
-            "medium"
+            "high"
           ]
         },
         "explore": {
           "off": [
             "glm",
-            "none"
+            "high"
           ],
           "on": [
-            "glm",
-            "medium"
+            "sol",
+            "high"
           ]
         },
         "plan": {
           "off": [
             "sol",
-            "medium"
+            "high"
           ],
           "on": [
             "astra",
@@ -192,7 +192,7 @@
         "review": {
           "off": [
             "sol",
-            "medium"
+            "high"
           ],
           "on": [
             "astra",
@@ -202,11 +202,11 @@
         "subagent": {
           "off": [
             "luna",
-            "low"
+            "high"
           ],
           "on": [
             "glm",
-            "medium"
+            "high"
           ]
         },
         "title": {
