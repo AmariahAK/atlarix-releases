@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "id": "15.4.0",
+      "title": "Atlarix in VS Code, Cursor, Kiro and Windsurf",
+      "body": "Install the Atlarix extension and the whole agent runs in your editor: every mode, your models and keys, edits you approve in the editor's own diff. Back after a break? One line recaps where the chat stands.",
+      "link": "https://atlarix.dev/docs/guides/editors",
+      "linkLabel": "Set it up"
+    },
+    {
       "id": "15.3.0",
       "title": "Atlarix in your editor",
       "body": "Use Atlarix inside Zed, JetBrains IDEs and VS Code: point your editor at `atlarix acp`. Edits and commands still wait for your OK.",
