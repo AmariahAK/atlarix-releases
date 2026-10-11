@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "id": "15.5.0",
+      "title": "Your keys and MCP servers, everywhere",
+      "body": "Every API key is checked with its provider, and MCP servers you set up in Claude Code, Cursor or VS Code are found with an Add button. The editor extension is redesigned: a task card, checkpoints with Compare, approvals above the box.",
+      "link": "https://atlarix.dev/docs/guides/editors",
+      "linkLabel": "See what's new"
+    },
+    {
       "id": "15.4.0",
       "title": "Atlarix in VS Code, Cursor, Kiro and Windsurf",
       "body": "Install the Atlarix extension and the whole agent runs in your editor: every mode, your models and keys, edits you approve in the editor's own diff. Back after a break? One line recaps where the chat stands.",
