@@ -28,6 +28,18 @@
       "apiKeyEnv": "OPENAI_SHARED_API_KEY",
       "protocol": "openai-responses",
       "balanceEndpoint": null
+    },
+    "openrouter-free": {
+      "baseUrl": "https://openrouter.ai/api/v1",
+      "apiKeyEnv": "OPENROUTER_FREE_API_KEY",
+      "protocol": "openai",
+      "balanceEndpoint": null
+    },
+    "requesty-free": {
+      "baseUrl": "https://router.requesty.ai/v1",
+      "apiKeyEnv": "REQUESTY_API_KEY",
+      "protocol": "openai",
+      "balanceEndpoint": null
     }
   },
   "routing": {
@@ -62,6 +74,18 @@
         "pool": "mini"
       },
       {
+        "provider": "openrouter-free",
+        "apiModelId": "openrouter/free",
+        "pool": "openrouter",
+        "pinServed": true
+      },
+      {
+        "provider": "requesty-free",
+        "apiModelId": "discover",
+        "pool": "requesty",
+        "discover": true
+      },
+      {
         "provider": "openai-shared",
         "apiModelId": "gpt-5.4",
         "pool": "large",
@@ -93,6 +117,25 @@
     "newUserMultiplier": 2,
     "newUserDays": 7,
     "releaseHours": 3,
+    "requestPools": {
+      "openrouter": {
+        "perDay": 1000,
+        "perMinute": 20
+      },
+      "requesty": {
+        "perDay": 200,
+        "perMinute": 20
+      }
+    },
+    "mix": [
+      "mini",
+      "openrouter",
+      "requesty"
+    ],
+    "requestShare": {
+      "floor": 40,
+      "ceiling": 240
+    },
     "paid": {
       "mode": "on",
       "shadowTier": "core-2",
