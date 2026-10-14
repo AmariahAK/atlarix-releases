@@ -31,15 +31,12 @@ lesson from it was that the skills which earn their place are the ones specific 
 codebase — not generic ones fetched from a list. So the best place to contribute a skill
 is your own project, where it will actually be used.
 
-## MCP registry
+## MCP servers
 
-Curated Model Context Protocol listings for the Atlarix MCP marketplace live in a separate
-repo, and that one does take contributions:
-
-**[github.com/AmariahAK/atlarix-mcps](https://github.com/AmariahAK/atlarix-mcps)**
-
-It holds no server code — just a merged `index.json` of MCP servers, which Atlarix installs
-from via each entry's `installUrl`.
+Since 15.7.0 the Atlarix MCP marketplace is the
+[official MCP Registry](https://registry.modelcontextprotocol.io). To list a server there,
+publish it to that registry; Atlarix picks it up within the hour. The old curated list,
+`atlarix-mcps`, is archived.
 
 ## What this repo does not contain
 
