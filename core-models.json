@@ -200,6 +200,10 @@
           "on": [
             "sol",
             "high"
+          ],
+          "low": [
+            "luna",
+            "high"
           ]
         },
         "debug": {
@@ -209,6 +213,10 @@
           ],
           "on": [
             "sol",
+            "high"
+          ],
+          "low": [
+            "luna",
             "high"
           ]
         },
@@ -220,6 +228,10 @@
           "on": [
             "sol",
             "high"
+          ],
+          "low": [
+            "luna",
+            "high"
           ]
         },
         "plan": {
@@ -230,6 +242,10 @@
           "on": [
             "astra",
             "high"
+          ],
+          "low": [
+            "luna",
+            "high"
           ]
         },
         "review": {
@@ -239,6 +255,10 @@
           ],
           "on": [
             "astra",
+            "high"
+          ],
+          "low": [
+            "luna",
             "high"
           ]
         },
@@ -289,6 +309,16 @@
       "medium",
       "high",
       "xhigh",
+      "max"
+    ],
+    "glm-5.3": [
+      "low",
+      "high",
+      "max"
+    ],
+    "glm-5.3-flash": [
+      "low",
+      "high",
       "max"
     ]
   }
