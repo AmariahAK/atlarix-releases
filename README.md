@@ -15,7 +15,7 @@ disk without your approval.
 which picks the best AI for each step of the job — no model to choose and no key to set up.
 Or pick a model yourself: **Atlarix Core** (managed, routed through our proxy: not logged,
 not retained), **your own API key** across
-<!-- CATALOG_COUNTS:START (auto-generated from models.dev — do not edit by hand) -->220+ providers and 7,500+ tool-capable models<!-- CATALOG_COUNTS:END -->,
+<!-- CATALOG_COUNTS:START (auto-generated from models.dev — do not edit by hand) -->230+ providers and 7,500+ tool-capable models<!-- CATALOG_COUNTS:END -->,
 or a **local model** via Ollama or LM Studio. The last two never touch our
 infrastructure, and are metered by nobody.
 
