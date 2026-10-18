@@ -17,6 +17,8 @@ models behind them.
 | Core 1 | `z-ai/glm-5.3` |
 | Core 2 | `openai/gpt-6.1-sol` |
 | Core 3 | `openai/gpt-6-astra` |
+| Core 4 | `z-ai/glm-5.3-flash` |
+| Core 5 | `openai/gpt-6-luna` |
 <!-- CORE_MODELS:END -->
 
 Generated from `core-models.json` by `scripts/gen-readme-models.mjs`. Edit only the JSON:

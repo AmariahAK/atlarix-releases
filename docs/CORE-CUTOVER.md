@@ -53,6 +53,8 @@ proxy.
 | core-1 | `zai` | `z-ai/glm-5.3` | `glm-5.3` | `ZHIPU_API_KEY` |
 | core-2 | `openai` | `openai/gpt-6.1-sol` | `gpt-6.1-sol` | `OPENAI_API_KEY` |
 | core-3 | `openai` | `openai/gpt-6-astra` | `gpt-6-astra` | `OPENAI_API_KEY` |
+| core-4 | `zai` | `z-ai/glm-5.3-flash` | `glm-5.3-flash` | `ZHIPU_API_KEY` |
+| core-5 | `openai` | `openai/gpt-6-luna` | `gpt-6-luna` | `OPENAI_API_KEY` |
 <!-- CORE_ROUTING:END -->
 
 The **API model id** column is what the provider is actually called with; the **wire id**
