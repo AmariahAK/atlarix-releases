@@ -3,12 +3,16 @@
   "models": {
     "core-1": "z-ai/glm-5.3",
     "core-2": "openai/gpt-6.1-sol",
-    "core-3": "openai/gpt-6-astra"
+    "core-3": "openai/gpt-6-astra",
+    "core-4": "z-ai/glm-5.3-flash",
+    "core-5": "openai/gpt-6-luna"
   },
   "webSearch": {
     "core-1": false,
     "core-2": false,
-    "core-3": false
+    "core-3": false,
+    "core-4": false,
+    "core-5": false
   },
   "providers": {
     "zai": {
@@ -56,6 +60,16 @@
     "core-3": {
       "provider": "openai",
       "apiModelId": "gpt-6-astra",
+      "cacheHitField": "input_tokens_details.cached_tokens"
+    },
+    "core-4": {
+      "provider": "zai",
+      "apiModelId": "glm-5.3-flash",
+      "cacheHitField": null
+    },
+    "core-5": {
+      "provider": "openai",
+      "apiModelId": "gpt-6-luna",
       "cacheHitField": "input_tokens_details.cached_tokens"
     }
   },
@@ -141,6 +155,7 @@
       "shadowTier": "core-2",
       "order": [
         "luna",
+        "flash",
         "glm",
         "sol",
         "astra"
@@ -189,6 +204,16 @@
             "provider": "zai",
             "apiModelId": "glm-5.3"
           }
+        ],
+        "flash": [
+          {
+            "provider": "zai",
+            "apiModelId": "glm-5.3-flash"
+          },
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6-luna"
+          }
         ]
       },
       "lanes": {
@@ -202,7 +227,7 @@
             "high"
           ],
           "low": [
-            "luna",
+            "flash",
             "high"
           ]
         },
@@ -216,7 +241,7 @@
             "high"
           ],
           "low": [
-            "luna",
+            "flash",
             "high"
           ]
         },
@@ -230,7 +255,7 @@
             "high"
           ],
           "low": [
-            "luna",
+            "flash",
             "high"
           ]
         },
@@ -244,7 +269,7 @@
             "high"
           ],
           "low": [
-            "luna",
+            "flash",
             "high"
           ]
         },
@@ -258,17 +283,21 @@
             "high"
           ],
           "low": [
-            "luna",
+            "flash",
             "high"
           ]
         },
         "subagent": {
           "off": [
-            "luna",
+            "flash",
             "high"
           ],
           "on": [
-            "glm",
+            "flash",
+            "high"
+          ],
+          "low": [
+            "flash",
             "high"
           ]
         },
