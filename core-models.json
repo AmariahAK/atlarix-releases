@@ -350,5 +350,14 @@
       "high",
       "max"
     ]
+  },
+  "tools": {
+    "search": {
+      "provider": "zai",
+      "path": "/web_search",
+      "engine": "search-prime",
+      "perCallUsd": 0.01,
+      "count": 10
+    }
   }
 }
