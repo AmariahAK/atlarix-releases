@@ -216,6 +216,40 @@
           }
         ]
       },
+      "tail": {
+        "luna": [
+          {
+            "provider": "bedrock",
+            "apiModelId": "minimax.minimax-m2.5"
+          },
+          {
+            "provider": "bedrock",
+            "apiModelId": "moonshotai.kimi-k2.5"
+          }
+        ],
+        "flash": [
+          {
+            "provider": "bedrock",
+            "apiModelId": "minimax.minimax-m2.5"
+          },
+          {
+            "provider": "bedrock",
+            "apiModelId": "moonshotai.kimi-k2.5"
+          }
+        ],
+        "glm": [
+          {
+            "provider": "bedrock",
+            "apiModelId": "us.moonshotai.kimi-k3"
+          }
+        ],
+        "sol": [
+          {
+            "provider": "bedrock",
+            "apiModelId": "us.moonshotai.kimi-k3"
+          }
+        ]
+      },
       "lanes": {
         "build": {
           "off": [
@@ -302,6 +336,13 @@
           ]
         },
         "title": {
+          "off": [
+            "luna",
+            "none"
+          ],
+          "pinned": true
+        },
+        "memory": {
           "off": [
             "luna",
             "none"
