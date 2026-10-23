@@ -400,5 +400,8 @@
       "perCallUsd": 0.01,
       "count": 10
     }
+  },
+  "proxy": {
+    "fallbackUrl": "https://gbo3uaoxtx2u7aub7npsbtzyua0dlqbi.lambda-url.us-east-1.on.aws"
   }
 }
