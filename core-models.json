@@ -5,14 +5,27 @@
     "core-2": "openai/gpt-6.1-sol",
     "core-3": "openai/gpt-6-astra",
     "core-4": "z-ai/glm-5.3-flash",
-    "core-5": "openai/gpt-6-luna"
+    "core-5": "openai/gpt-6-luna",
+    "core-6": "openai/gpt-6.1-terra",
+    "core-7": "anthropic/claude-sonnet-5-5",
+    "core-8": "anthropic/claude-opus-5-5",
+    "core-9": "anthropic/claude-fable-5-1"
   },
+  "retired": [
+    "core-1",
+    "core-4",
+    "core-5"
+  ],
   "webSearch": {
     "core-1": false,
     "core-2": false,
     "core-3": false,
     "core-4": false,
-    "core-5": false
+    "core-5": false,
+    "core-6": false,
+    "core-7": false,
+    "core-8": false,
+    "core-9": false
   },
   "providers": {
     "zai": {
@@ -44,6 +57,12 @@
       "apiKeyEnv": "REQUESTY_API_KEY",
       "protocol": "openai",
       "balanceEndpoint": null
+    },
+    "anthropic": {
+      "baseUrl": "https://api.anthropic.com",
+      "apiKeyEnv": "ANTHROPIC_API_KEY",
+      "protocol": "anthropic",
+      "balanceEndpoint": null
     }
   },
   "routing": {
@@ -71,6 +90,29 @@
       "provider": "openai",
       "apiModelId": "gpt-6-luna",
       "cacheHitField": "input_tokens_details.cached_tokens"
+    },
+    "core-6": {
+      "provider": "openai",
+      "apiModelId": "gpt-6.1-terra",
+      "cacheHitField": "input_tokens_details.cached_tokens"
+    },
+    "core-7": {
+      "provider": "anthropic",
+      "apiModelId": "claude-sonnet-5-5",
+      "cacheHitField": "cache_read_input_tokens",
+      "cacheWriteField": "cache_creation_input_tokens"
+    },
+    "core-8": {
+      "provider": "anthropic",
+      "apiModelId": "claude-opus-5-5",
+      "cacheHitField": "cache_read_input_tokens",
+      "cacheWriteField": "cache_creation_input_tokens"
+    },
+    "core-9": {
+      "provider": "anthropic",
+      "apiModelId": "claude-fable-5-1",
+      "cacheHitField": "cache_read_input_tokens",
+      "cacheWriteField": "cache_creation_input_tokens"
     }
   },
   "auto": {
@@ -155,10 +197,7 @@
       "shadowTier": "core-2",
       "order": [
         "luna",
-        "flash",
-        "glm",
-        "sol",
-        "astra"
+        "terra"
       ],
       "levels": {
         "luna": [
@@ -167,171 +206,103 @@
             "apiModelId": "gpt-6-luna"
           },
           {
-            "provider": "zai",
-            "apiModelId": "glm-5.3-flash"
+            "provider": "anthropic",
+            "apiModelId": "claude-haiku-5-5"
           }
         ],
-        "glm": [
-          {
-            "provider": "zai",
-            "apiModelId": "glm-5.3"
-          },
+        "terra": [
           {
             "provider": "openai",
-            "apiModelId": "gpt-6.1-sol"
-          }
-        ],
-        "sol": [
-          {
-            "provider": "openai",
-            "apiModelId": "gpt-6.1-sol"
+            "apiModelId": "gpt-6.1-terra"
           },
           {
-            "provider": "zai",
-            "apiModelId": "glm-5.3"
-          }
-        ],
-        "astra": [
-          {
-            "provider": "openai",
-            "apiModelId": "gpt-6-astra"
-          },
-          {
-            "provider": "openai",
-            "apiModelId": "gpt-6.1-sol"
-          },
-          {
-            "provider": "zai",
-            "apiModelId": "glm-5.3"
-          }
-        ],
-        "flash": [
-          {
-            "provider": "zai",
-            "apiModelId": "glm-5.3-flash"
-          },
-          {
-            "provider": "openai",
-            "apiModelId": "gpt-6-luna"
-          }
-        ]
-      },
-      "tail": {
-        "luna": [
-          {
-            "provider": "bedrock",
-            "apiModelId": "minimax.minimax-m2.5"
-          },
-          {
-            "provider": "bedrock",
-            "apiModelId": "moonshotai.kimi-k2.5"
-          }
-        ],
-        "flash": [
-          {
-            "provider": "bedrock",
-            "apiModelId": "minimax.minimax-m2.5"
-          },
-          {
-            "provider": "bedrock",
-            "apiModelId": "moonshotai.kimi-k2.5"
-          }
-        ],
-        "glm": [
-          {
-            "provider": "bedrock",
-            "apiModelId": "us.moonshotai.kimi-k3"
-          }
-        ],
-        "sol": [
-          {
-            "provider": "bedrock",
-            "apiModelId": "us.moonshotai.kimi-k3"
+            "provider": "anthropic",
+            "apiModelId": "claude-sonnet-5-5"
           }
         ]
       },
       "lanes": {
         "build": {
           "off": [
-            "glm",
+            "terra",
             "high"
           ],
           "on": [
-            "sol",
+            "terra",
             "high"
           ],
           "low": [
-            "flash",
+            "luna",
             "high"
           ]
         },
         "debug": {
           "off": [
-            "glm",
+            "terra",
             "high"
           ],
           "on": [
-            "sol",
+            "terra",
             "high"
           ],
           "low": [
-            "flash",
-            "high"
-          ]
-        },
-        "explore": {
-          "off": [
-            "glm",
-            "high"
-          ],
-          "on": [
-            "sol",
-            "high"
-          ],
-          "low": [
-            "flash",
+            "luna",
             "high"
           ]
         },
         "plan": {
           "off": [
-            "sol",
+            "terra",
             "high"
           ],
           "on": [
-            "astra",
+            "terra",
             "high"
           ],
           "low": [
-            "flash",
+            "luna",
             "high"
           ]
         },
         "review": {
           "off": [
-            "sol",
+            "terra",
             "high"
           ],
           "on": [
-            "astra",
+            "terra",
             "high"
           ],
           "low": [
-            "flash",
+            "luna",
+            "high"
+          ]
+        },
+        "explore": {
+          "off": [
+            "luna",
+            "high"
+          ],
+          "on": [
+            "luna",
+            "high"
+          ],
+          "low": [
+            "luna",
             "high"
           ]
         },
         "subagent": {
           "off": [
-            "flash",
+            "luna",
             "high"
           ],
           "on": [
-            "flash",
+            "luna",
             "high"
           ],
           "low": [
-            "flash",
+            "luna",
             "high"
           ]
         },
@@ -370,6 +341,178 @@
           ],
           "pinned": true
         }
+      },
+      "ladder": {
+        "altProvider": "anthropic",
+        "altShare": 0.25,
+        "qualityFailures": 2
+      }
+    },
+    "zenith": {
+      "id": "atlarix/zenith",
+      "label": "Atlarix Zenith",
+      "mode": "on",
+      "order": [
+        "sol",
+        "astra"
+      ],
+      "levels": {
+        "luna": [
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6-luna"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-haiku-5-5"
+          }
+        ],
+        "sol": [
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6.1-sol"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-opus-5-5"
+          }
+        ],
+        "astra": [
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6-astra"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-fable-5-1"
+          }
+        ]
+      },
+      "lanes": {
+        "build": {
+          "off": [
+            "sol",
+            "high"
+          ],
+          "on": [
+            "sol",
+            "high"
+          ],
+          "low": [
+            "sol",
+            "high"
+          ]
+        },
+        "debug": {
+          "off": [
+            "sol",
+            "high"
+          ],
+          "on": [
+            "sol",
+            "high"
+          ],
+          "low": [
+            "sol",
+            "high"
+          ]
+        },
+        "explore": {
+          "off": [
+            "sol",
+            "high"
+          ],
+          "on": [
+            "sol",
+            "high"
+          ],
+          "low": [
+            "sol",
+            "high"
+          ]
+        },
+        "plan": {
+          "off": [
+            "sol",
+            "high"
+          ],
+          "on": [
+            "sol",
+            "high"
+          ],
+          "low": [
+            "sol",
+            "high"
+          ]
+        },
+        "review": {
+          "off": [
+            "sol",
+            "high"
+          ],
+          "on": [
+            "sol",
+            "high"
+          ],
+          "low": [
+            "sol",
+            "high"
+          ]
+        },
+        "subagent": {
+          "off": [
+            "sol",
+            "high"
+          ],
+          "on": [
+            "sol",
+            "high"
+          ],
+          "low": [
+            "sol",
+            "high"
+          ]
+        },
+        "title": {
+          "off": [
+            "luna",
+            "none"
+          ],
+          "pinned": true
+        },
+        "memory": {
+          "off": [
+            "luna",
+            "none"
+          ],
+          "pinned": true
+        },
+        "compaction": {
+          "off": [
+            "luna",
+            "low"
+          ],
+          "pinned": true
+        },
+        "summary": {
+          "off": [
+            "luna",
+            "low"
+          ],
+          "pinned": true
+        },
+        "transcribe": {
+          "off": [
+            "luna",
+            "none"
+          ],
+          "pinned": true
+        }
+      },
+      "ladder": {
+        "altProvider": "anthropic",
+        "altShare": 0.25,
+        "qualityFailures": 2
       }
     }
   },
