@@ -367,6 +367,16 @@
             "apiModelId": "claude-haiku-5-5"
           }
         ],
+        "terra": [
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6.1-terra"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-sonnet-5-5"
+          }
+        ],
         "sol": [
           {
             "provider": "openai",
@@ -461,15 +471,15 @@
         },
         "subagent": {
           "off": [
-            "sol",
+            "terra",
             "high"
           ],
           "on": [
-            "sol",
+            "terra",
             "high"
           ],
           "low": [
-            "sol",
+            "terra",
             "high"
           ]
         },
