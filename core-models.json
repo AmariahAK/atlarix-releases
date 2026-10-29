@@ -309,35 +309,35 @@
         "title": {
           "off": [
             "luna",
-            "none"
+            "high"
           ],
           "pinned": true
         },
         "memory": {
           "off": [
             "luna",
-            "none"
+            "high"
           ],
           "pinned": true
         },
         "compaction": {
           "off": [
             "luna",
-            "low"
+            "high"
           ],
           "pinned": true
         },
         "summary": {
           "off": [
             "luna",
-            "low"
+            "high"
           ],
           "pinned": true
         },
         "transcribe": {
           "off": [
             "luna",
-            "none"
+            "high"
           ],
           "pinned": true
         }
@@ -476,35 +476,35 @@
         "title": {
           "off": [
             "luna",
-            "none"
+            "high"
           ],
           "pinned": true
         },
         "memory": {
           "off": [
             "luna",
-            "none"
+            "high"
           ],
           "pinned": true
         },
         "compaction": {
           "off": [
             "luna",
-            "low"
+            "high"
           ],
           "pinned": true
         },
         "summary": {
           "off": [
             "luna",
-            "low"
+            "high"
           ],
           "pinned": true
         },
         "transcribe": {
           "off": [
             "luna",
-            "none"
+            "high"
           ],
           "pinned": true
         }
@@ -534,15 +534,6 @@
       "high",
       "max"
     ]
-  },
-  "tools": {
-    "search": {
-      "provider": "zai",
-      "path": "/web_search",
-      "engine": "search-prime",
-      "perCallUsd": 0.01,
-      "count": 10
-    }
   },
   "proxy": {
     "fallbackUrl": "https://gbo3uaoxtx2u7aub7npsbtzyua0dlqbi.lambda-url.us-east-1.on.aws"
