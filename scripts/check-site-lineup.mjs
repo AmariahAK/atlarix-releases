@@ -47,8 +47,11 @@ function isEmptySlot(id) {
 }
 
 const cfg = JSON.parse(readFileSync(CORE_MODELS_PATH, "utf8"));
+const retired = new Set(Array.isArray(cfg.retired) ? cfg.retired : []);
 const expected = Object.entries(cfg.models ?? {})
   .filter(([, id]) => !isEmptySlot(id))
+  // Retired slots are kept for installed builds only; the site lists what we offer.
+  .filter(([slot]) => !retired.has(slot))
   .map(([slot, id]) => ({ slot, id: String(id) }));
 
 if (expected.length === 0) {

@@ -92,6 +92,17 @@ const PROVIDERS = {
     openRouterVendor: "openai",
     listPath: "/models",
   },
+  // Messages API: the key goes in x-api-key with an anthropic-version, not a Bearer
+  // token. The proxy's base URL has no /v1 (its SDK adds it); this list call does.
+  anthropic: {
+    label: "Anthropic",
+    baseUrl: "https://api.anthropic.com",
+    apiKeyEnv: "ANTHROPIC_API_KEY",
+    modelsDevId: "anthropic",
+    openRouterVendor: "anthropic",
+    listPath: "/v1/models",
+    headers: (key) => ({ "x-api-key": key, "anthropic-version": "2023-06-01" }),
+  },
 };
 
 const args = process.argv.slice(2);
@@ -195,9 +206,10 @@ async function liveModelIds(provider) {
   const key = process.env[provider.apiKeyEnv];
   if (!key) return { ids: null, reason: `no ${provider.apiKeyEnv} in env` };
   try {
-    const json = await fetchJson(`${provider.baseUrl}${provider.listPath}`, {
-      Authorization: `Bearer ${key}`,
-    });
+    const json = await fetchJson(
+      `${provider.baseUrl}${provider.listPath}`,
+      provider.headers ? provider.headers(key) : { Authorization: `Bearer ${key}` },
+    );
     const list = Array.isArray(json?.data) ? json.data : [];
     const ids = list.map((m) => m?.id).filter((id) => typeof id === "string");
     return { ids, reason: null };
