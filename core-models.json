@@ -1,39 +1,22 @@
 {
   "version": 1,
   "models": {
-    "core-1": "z-ai/glm-5.3",
-    "core-2": "openai/gpt-6.1-sol",
-    "core-3": "openai/gpt-6-astra",
-    "core-4": "z-ai/glm-5.3-flash",
-    "core-5": "openai/gpt-6-luna",
-    "core-6": "openai/gpt-6.1-terra",
-    "core-7": "anthropic/claude-sonnet-5-5",
-    "core-8": "anthropic/claude-opus-5-5",
-    "core-9": "anthropic/claude-fable-5-1"
+    "core-1": "openai/gpt-6.1-terra",
+    "core-2": "anthropic/claude-sonnet-5-5",
+    "core-3": "openai/gpt-6.1-sol",
+    "core-4": "anthropic/claude-opus-5-5",
+    "core-5": "openai/gpt-6-astra",
+    "core-6": "anthropic/claude-fable-5-1"
   },
-  "retired": [
-    "core-1",
-    "core-4",
-    "core-5"
-  ],
   "webSearch": {
     "core-1": false,
     "core-2": false,
     "core-3": false,
     "core-4": false,
     "core-5": false,
-    "core-6": false,
-    "core-7": false,
-    "core-8": false,
-    "core-9": false
+    "core-6": false
   },
   "providers": {
-    "zai": {
-      "baseUrl": "https://api.z.ai/api/paas/v4",
-      "apiKeyEnv": "ZHIPU_API_KEY",
-      "protocol": "openai",
-      "balanceEndpoint": null
-    },
     "openai": {
       "baseUrl": "https://api.openai.com/v1",
       "apiKeyEnv": "OPENAI_API_KEY",
@@ -67,48 +50,33 @@
   },
   "routing": {
     "core-1": {
-      "provider": "zai",
-      "apiModelId": "glm-5.3",
-      "cacheHitField": null
-    },
-    "core-2": {
-      "provider": "openai",
-      "apiModelId": "gpt-6.1-sol",
-      "cacheHitField": "input_tokens_details.cached_tokens"
-    },
-    "core-3": {
-      "provider": "openai",
-      "apiModelId": "gpt-6-astra",
-      "cacheHitField": "input_tokens_details.cached_tokens"
-    },
-    "core-4": {
-      "provider": "zai",
-      "apiModelId": "glm-5.3-flash",
-      "cacheHitField": null
-    },
-    "core-5": {
-      "provider": "openai",
-      "apiModelId": "gpt-6-luna",
-      "cacheHitField": "input_tokens_details.cached_tokens"
-    },
-    "core-6": {
       "provider": "openai",
       "apiModelId": "gpt-6.1-terra",
       "cacheHitField": "input_tokens_details.cached_tokens"
     },
-    "core-7": {
+    "core-2": {
       "provider": "anthropic",
       "apiModelId": "claude-sonnet-5-5",
       "cacheHitField": "cache_read_input_tokens",
       "cacheWriteField": "cache_creation_input_tokens"
     },
-    "core-8": {
+    "core-3": {
+      "provider": "openai",
+      "apiModelId": "gpt-6.1-sol",
+      "cacheHitField": "input_tokens_details.cached_tokens"
+    },
+    "core-4": {
       "provider": "anthropic",
       "apiModelId": "claude-opus-5-5",
       "cacheHitField": "cache_read_input_tokens",
       "cacheWriteField": "cache_creation_input_tokens"
     },
-    "core-9": {
+    "core-5": {
+      "provider": "openai",
+      "apiModelId": "gpt-6-astra",
+      "cacheHitField": "input_tokens_details.cached_tokens"
+    },
+    "core-6": {
       "provider": "anthropic",
       "apiModelId": "claude-fable-5-1",
       "cacheHitField": "cache_read_input_tokens",
@@ -146,13 +114,6 @@
         "apiModelId": "gpt-5.4",
         "pool": "large",
         "noTools": true
-      },
-      {
-        "provider": "zai",
-        "apiModelId": "glm-4.7-flash",
-        "pool": "floor",
-        "concurrency": 1,
-        "textOnly": true
       }
     ],
     "pools": {
@@ -532,16 +493,6 @@
       "medium",
       "high",
       "xhigh",
-      "max"
-    ],
-    "glm-5.3": [
-      "low",
-      "high",
-      "max"
-    ],
-    "glm-5.3-flash": [
-      "low",
-      "high",
       "max"
     ]
   },
