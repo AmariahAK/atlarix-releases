@@ -1,10 +1,9 @@
 name: Sync generated tables
 
-# Three jobs over the two files this repo publishes live:
+# Jobs over the two files this repo publishes live:
 #   check-updates      — updates.json is something the app can actually show
 #   check-core-models  — core-models.json describes tiers that can serve and bill
 #   sync-site-lineup   — regenerate + push atlarix-launchpad's derived lineup
-#   check-site-lineup  — atlarix.dev is actually SERVING the lineup we publish
 #   sync               — regenerate the generated tables + the README catalogue counts
 #
 # core-models.json is the single source of truth; edit only the JSON.
@@ -26,7 +25,6 @@ on:
       - "scripts/gen-readme-catalog.mjs"
       - "scripts/check-updates.mjs"
       - "scripts/pick-core-model.mjs"
-      - "scripts/check-site-lineup.mjs"
       - ".github/workflows/sync-readme.yml"
   pull_request:
     paths:
@@ -94,15 +92,15 @@ jobs:
         run: node scripts/pick-core-model.mjs --check
 
   sync-site-lineup:
-    # AUTOMATES WHAT check-site-lineup USED TO ASK A HUMAN TO DO. After a merge,
-    # regenerate atlarix-launchpad's derived lineup from the JSON that just landed
+    # After a merge, regenerate atlarix-launchpad's derived lineup (the Cloud page's
+    # model menu reads it; the site no longer lists models) from the JSON that just landed
     # and push it; the push is what redeploys the site (Vercel's git integration,
     # not Actions — so the launchpad being private costs no Actions minutes).
     #
     # Authenticates with a DEPLOY KEY scoped to atlarix-launchpad alone
     # (secret LAUNCHPAD_DEPLOY_KEY) — write access to one repo, nothing else.
     # Commits only the one generated file, so it cannot push anything else.
-    # Without the secret it skips cleanly and check-site-lineup reports as before.
+    # Without the secret it skips cleanly.
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
@@ -143,47 +141,6 @@ jobs:
           else
             echo "Site lineup already in sync."
           fi
-
-  check-site-lineup:
-    # AFTER THE MERGE ONLY, and it is the one job here that asserts on something
-    # outside this repo.
-    #
-    # core-models.json goes live to every installed client within the hour. The
-    # marketing site cannot: it is statically generated, so it only tells the truth
-    # once atlarix-launchpad regenerates its derived lineup and redeploys. Nothing
-    # connects those two events, so the site can go on naming a model that is no
-    # longer served — which it did, advertising "GLM 5.3 and GPT 5.6" while three
-    # slots were mapped and one was a GPT-6.
-    #
-    # Not on pull_request: the site necessarily still serves the OLD lineup while a
-    # change is in review, so it would fail every such PR for being correct.
-    #
-    # A red run here does NOT mean this repo is wrong — it means the launchpad owes
-    # a redeploy, and the failure message says so.
-    #
-    # Runs AFTER sync-site-lineup. When that job just pushed, the site is mid-
-    # redeploy, so the check retries for up to ~10 minutes before calling it.
-    if: github.event_name != 'pull_request'
-    needs: sync-site-lineup
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-      - name: Is atlarix.dev serving this lineup?
-        env:
-          JUST_PUSHED: ${{ needs.sync-site-lineup.outputs.pushed }}
-        run: |
-          tries=1
-          [[ "$JUST_PUSHED" == "true" ]] && tries=20
-          for i in $(seq 1 "$tries"); do
-            if node scripts/check-site-lineup.mjs; then exit 0; fi
-            [[ "$i" -lt "$tries" ]] && { echo "Site not updated yet (attempt $i/$tries) — waiting for the redeploy."; sleep 30; }
-          done
-          exit 1
 
   sync:
     # Only after a merge: this job rewrites the generated files and pushes.
