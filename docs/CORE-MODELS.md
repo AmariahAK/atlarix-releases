@@ -14,15 +14,12 @@ models behind them.
 <!-- CORE_MODELS:START (auto-generated from core-models.json — do not edit by hand) -->
 | Tier | Model |
 | --- | --- |
-| Core 1 | `z-ai/glm-5.3` |
-| Core 2 | `openai/gpt-6.1-sol` |
-| Core 3 | `openai/gpt-6-astra` |
-| Core 4 | `z-ai/glm-5.3-flash` |
-| Core 5 | `openai/gpt-6-luna` |
-| Core 6 | `openai/gpt-6.1-terra` |
-| Core 7 | `anthropic/claude-sonnet-5-5` |
-| Core 8 | `anthropic/claude-opus-5-5` |
-| Core 9 | `anthropic/claude-fable-5-1` |
+| Core 1 | `openai/gpt-6.1-terra` |
+| Core 2 | `anthropic/claude-sonnet-5-5` |
+| Core 3 | `openai/gpt-6.1-sol` |
+| Core 4 | `anthropic/claude-opus-5-5` |
+| Core 5 | `openai/gpt-6-astra` |
+| Core 6 | `anthropic/claude-fable-5-1` |
 <!-- CORE_MODELS:END -->
 
 Generated from `core-models.json` by `scripts/gen-readme-models.mjs`. Edit only the JSON:
