@@ -19,6 +19,10 @@ models behind them.
 | Core 3 | `openai/gpt-6-astra` |
 | Core 4 | `z-ai/glm-5.3-flash` |
 | Core 5 | `openai/gpt-6-luna` |
+| Core 6 | `openai/gpt-6.1-terra` |
+| Core 7 | `anthropic/claude-sonnet-5-5` |
+| Core 8 | `anthropic/claude-opus-5-5` |
+| Core 9 | `anthropic/claude-fable-5-1` |
 <!-- CORE_MODELS:END -->
 
 Generated from `core-models.json` by `scripts/gen-readme-models.mjs`. Edit only the JSON:
