@@ -165,12 +165,20 @@
           {
             "provider": "openai",
             "apiModelId": "gpt-6-luna"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-haiku-5-5"
           }
         ],
         "terra": [
           {
             "provider": "openai",
             "apiModelId": "gpt-6.1-terra"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-sonnet-5-5"
           }
         ]
       },
@@ -314,24 +322,40 @@
           {
             "provider": "openai",
             "apiModelId": "gpt-6-luna"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-haiku-5-5"
           }
         ],
         "terra": [
           {
             "provider": "openai",
             "apiModelId": "gpt-6.1-terra"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-sonnet-5-5"
           }
         ],
         "sol": [
           {
             "provider": "openai",
             "apiModelId": "gpt-6.1-sol"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-opus-5-5"
           }
         ],
         "astra": [
           {
             "provider": "openai",
             "apiModelId": "gpt-6-astra"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-fable-5-1"
           }
         ]
       },
