@@ -24,6 +24,21 @@ infrastructure, and are metered by nobody.
 
 ---
 
+## Latest: 15.12.3
+
+**Cross-session features:** Sessions can now message each other, set each other's mode and
+model, review each other's plans and pending changes, and get notified when a delegated
+task finishes. Fork a session, send it a task, and read its results — all from the CLI,
+the app, VS Code or any ACP editor.
+
+**This release:** Case-insensitive project instructions (`atlarix.md` in any casing),
+proactive image rejection for text-only models, readable peer message previews, and
+Chrome extension compliance fixes.
+
+See the [changelog](https://atlarix.dev/changelog) for the full history.
+
+---
+
 ## The Atlarix family
 
 | | What it is | Get it |
