@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "id": "15.13.3",
+      "title": "Sessions that review each other",
+      "body": "Sessions see each other's messages where they land and review each other's requests. Questions come with described, multi-pick options. In the CLI, ctrl+s sends what you queued now.",
+      "link": "https://atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
       "id": "15.12.3",
       "title": "Sessions that talk to each other",
       "body": "Fork a session, send it a task, set its mode and model, review its plan, and get notified when it finishes. Cross-session messaging works across the app, CLI, VS Code and any ACP editor.",
