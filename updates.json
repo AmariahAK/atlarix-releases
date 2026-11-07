@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "id": "15.14.0",
+      "title": "Free Auto just works",
+      "body": "Free Atlarix Auto runs your first message with no key and no question. Sub-agents finish their part, the chat keeps up with long answers, and in the CLI you can click to edit.",
+      "link": "https://atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
       "id": "15.13.3",
       "title": "Sessions that review each other",
       "body": "Sessions see each other's messages where they land and review each other's requests. Questions come with described, multi-pick options. In the CLI, ctrl+s sends what you queued now.",
@@ -18,14 +25,14 @@
     {
       "id": "15.5.0",
       "title": "Your keys and MCP servers, everywhere",
-      "body": "Every API key is checked with its provider, and MCP servers you set up in Claude Code, Cursor or VS Code are found with an Add button. The editor extension is redesigned: a task card, checkpoints with Compare, approvals above the box.",
+      "body": "Every API key is checked with its provider, and MCP servers from Claude Code, Cursor or VS Code are found with an Add button. The editor extension is redesigned.",
       "link": "https://atlarix.dev/docs/guides/editors",
       "linkLabel": "See what's new"
     },
     {
       "id": "15.4.0",
       "title": "Atlarix in VS Code, Cursor, Kiro and Windsurf",
-      "body": "Install the Atlarix extension and the whole agent runs in your editor: every mode, your models and keys, edits you approve in the editor's own diff. Back after a break? One line recaps where the chat stands.",
+      "body": "Install the Atlarix extension and the whole agent runs in your editor: every mode, your models and keys, and edits you approve in the editor's own diff.",
       "link": "https://atlarix.dev/docs/guides/editors",
       "linkLabel": "Set it up"
     },
