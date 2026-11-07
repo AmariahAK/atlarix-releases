@@ -92,6 +92,7 @@
   "auto": {
     "id": "atlarix/auto",
     "label": "Atlarix Auto",
+    "freeWorkingWindowTokens": 200000,
     "chain": [
       {
         "provider": "openai-shared",
