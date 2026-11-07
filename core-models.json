@@ -41,6 +41,12 @@
       "protocol": "openai",
       "balanceEndpoint": null
     },
+    "zai": {
+      "baseUrl": "https://api.z.ai/api/paas/v4",
+      "apiKeyEnv": "ZHIPU_API_KEY",
+      "protocol": "openai",
+      "balanceEndpoint": null
+    },
     "anthropic": {
       "baseUrl": "https://api.anthropic.com",
       "apiKeyEnv": "ANTHROPIC_API_KEY",
@@ -114,6 +120,13 @@
         "apiModelId": "gpt-5.4",
         "pool": "large",
         "noTools": true
+      },
+      {
+        "provider": "zai",
+        "apiModelId": "glm-4.7-flash",
+        "pool": "floor",
+        "concurrency": 1,
+        "textOnly": true
       }
     ],
     "pools": {
