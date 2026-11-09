@@ -55,7 +55,7 @@ proxy.
 | core-3 | `openai` | `openai/gpt-6.1-sol` | `gpt-6.1-sol` | `OPENAI_API_KEY` |
 | core-4 | `anthropic` | `anthropic/claude-opus-5-5` | `claude-opus-5-5` | `ANTHROPIC_API_KEY` |
 | core-5 | `openai` | `openai/gpt-6-astra` | `gpt-6-astra` | `OPENAI_API_KEY` |
-| core-6 | `anthropic` | `anthropic/claude-fable-5-1` | `claude-fable-5-1` | `ANTHROPIC_API_KEY` |
+| core-6 | `anthropic` | `anthropic/claude-fable-5-2` | `claude-fable-5-2` | `ANTHROPIC_API_KEY` |
 <!-- CORE_ROUTING:END -->
 
 The **API model id** column is what the provider is actually called with; the **wire id**
