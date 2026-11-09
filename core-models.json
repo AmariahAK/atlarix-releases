@@ -284,7 +284,7 @@
         "title": {
           "off": [
             "luna",
-            "high"
+            "none"
           ],
           "pinned": true
         },
@@ -461,7 +461,7 @@
         "title": {
           "off": [
             "luna",
-            "high"
+            "none"
           ],
           "pinned": true
         },
