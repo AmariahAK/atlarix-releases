@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "id": "15.15.2",
+      "title": "Slack in Atlarix",
+      "body": "Pick Slack in the MCP list and press Connect. The agent can read channels and threads, search and post as you, in the app, the CLI and your editor.",
+      "link": "https://atlarix.dev/blogs/atlarix-15-15-connect-slack-ai-coding-agent",
+      "linkLabel": "What's new"
+    },
+    {
       "id": "15.14.0",
       "title": "Free Auto just works",
       "body": "Free Atlarix Auto runs your first message with no key and no question. Sub-agents finish their part, the chat keeps up with long answers, and in the CLI you can click to edit.",
