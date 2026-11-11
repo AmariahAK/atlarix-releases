@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "id": "15.16.1",
+      "title": "Make images",
+      "body": "Ask the agent for an image and it makes or edits one, saved in your project. Paid chats use your balance to the last cent, and Auto and Zenith can use computer use.",
+      "link": "https://atlarix.dev/blogs/atlarix-15-16-make-images-ai-coding-agent",
+      "linkLabel": "What's new"
+    },
+    {
       "id": "15.15.2",
       "title": "Slack in Atlarix",
       "body": "Pick Slack in the MCP list and press Connect. The agent can read channels and threads, search and post as you, in the app, the CLI and your editor.",
