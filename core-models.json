@@ -418,29 +418,29 @@
         },
         "plan": {
           "off": [
-            "sol",
+            "astra",
             "high"
           ],
           "on": [
-            "sol",
+            "astra",
             "high"
           ],
           "low": [
-            "sol",
+            "astra",
             "high"
           ]
         },
         "review": {
           "off": [
-            "sol",
+            "astra",
             "high"
           ],
           "on": [
-            "sol",
+            "astra",
             "high"
           ],
           "low": [
-            "sol",
+            "astra",
             "high"
           ]
         },
