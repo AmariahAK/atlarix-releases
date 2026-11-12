@@ -327,6 +327,23 @@
         "altProvider": "anthropic",
         "altShare": 0.25,
         "qualityFailures": 2
+      },
+      "complexity": {
+        "mode": "shadow",
+        "share": 1,
+        "simple": "luna",
+        "upper": "terra",
+        "weights": { "length": 0.1, "code": 0.3, "reasoning": 0.25, "technical": 0.25, "simple": 0.05, "multiStep": 0.03, "questions": 0.02 },
+        "tiers": [0.15, 0.35, 0.6],
+        "tokens": { "short": 15, "long": 400 },
+        "guards": { "followUpTokens": 15, "toolWorkFloor": true, "simpleNeedsEvidence": true },
+        "classifier": {
+          "mode": "off",
+          "margin": 0.05,
+          "timeoutMs": 1500,
+          "decisions": { "provider": "openai", "apiModelId": "gpt-6-luna" },
+          "fallback": { "provider": "anthropic", "apiModelId": "claude-haiku-5-5" }
+        }
       }
     },
     "zenith": {
@@ -466,7 +483,7 @@
         },
         "title": {
           "off": [
-            "luna",
+            "terra",
             "none"
           ],
           "pinned": true
@@ -480,7 +497,7 @@
         },
         "compaction": {
           "off": [
-            "luna",
+            "terra",
             "high"
           ],
           "pinned": true
@@ -504,6 +521,23 @@
         "altProvider": "anthropic",
         "altShare": 0.25,
         "qualityFailures": 2
+      },
+      "complexity": {
+        "mode": "shadow",
+        "share": 1,
+        "simple": "sol",
+        "upper": "astra",
+        "weights": { "length": 0.1, "code": 0.3, "reasoning": 0.25, "technical": 0.25, "simple": 0.05, "multiStep": 0.03, "questions": 0.02 },
+        "tiers": [0.15, 0.35, 0.6],
+        "tokens": { "short": 15, "long": 400 },
+        "guards": { "followUpTokens": 15, "toolWorkFloor": true, "simpleNeedsEvidence": true },
+        "classifier": {
+          "mode": "off",
+          "margin": 0.05,
+          "timeoutMs": 1500,
+          "decisions": { "provider": "openai", "apiModelId": "gpt-6-luna" },
+          "fallback": { "provider": "anthropic", "apiModelId": "claude-haiku-5-5" }
+        }
       }
     }
   },
