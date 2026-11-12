@@ -329,7 +329,7 @@
         "qualityFailures": 2
       },
       "complexity": {
-        "mode": "shadow",
+        "mode": "on",
         "share": 1,
         "simple": "luna",
         "upper": "terra",
@@ -338,12 +338,13 @@
         "tokens": { "short": 15, "long": 400 },
         "guards": { "followUpTokens": 15, "toolWorkFloor": true, "simpleNeedsEvidence": true },
         "classifier": {
-          "mode": "off",
+          "mode": "on",
           "margin": 0.05,
           "timeoutMs": 1500,
-          "decisions": { "provider": "openai", "apiModelId": "gpt-6-luna" },
-          "fallback": { "provider": "anthropic", "apiModelId": "claude-haiku-5-5" }
-        }
+          "card": "auto",
+          "decisions": { "provider": "openai", "apiModelId": "gpt-6-luna" }
+        },
+        "learner": { "mode": "on" }
       }
     },
     "zenith": {
@@ -523,7 +524,7 @@
         "qualityFailures": 2
       },
       "complexity": {
-        "mode": "shadow",
+        "mode": "on",
         "share": 1,
         "simple": "sol",
         "upper": "astra",
@@ -532,12 +533,13 @@
         "tokens": { "short": 15, "long": 400 },
         "guards": { "followUpTokens": 15, "toolWorkFloor": true, "simpleNeedsEvidence": true },
         "classifier": {
-          "mode": "off",
+          "mode": "on",
           "margin": 0.05,
           "timeoutMs": 1500,
-          "decisions": { "provider": "openai", "apiModelId": "gpt-6-luna" },
-          "fallback": { "provider": "anthropic", "apiModelId": "claude-haiku-5-5" }
-        }
+          "card": "zenith",
+          "decisions": { "provider": "openai", "apiModelId": "gpt-6-luna" }
+        },
+        "learner": { "mode": "on" }
       }
     }
   },
