@@ -206,85 +206,85 @@
         "build": {
           "off": [
             "terra",
-            "high"
+            "medium"
           ],
           "on": [
             "terra",
-            "high"
+            "medium"
           ],
           "low": [
             "terra",
-            "high"
+            "medium"
           ]
         },
         "debug": {
           "off": [
             "terra",
-            "high"
+            "medium"
           ],
           "on": [
             "terra",
-            "high"
+            "medium"
           ],
           "low": [
             "terra",
-            "high"
+            "medium"
           ]
         },
         "plan": {
           "off": [
             "terra",
-            "high"
+            "medium"
           ],
           "on": [
             "terra",
-            "high"
+            "medium"
           ],
           "low": [
             "terra",
-            "high"
+            "medium"
           ]
         },
         "review": {
           "off": [
             "terra",
-            "high"
+            "medium"
           ],
           "on": [
             "terra",
-            "high"
+            "medium"
           ],
           "low": [
             "terra",
-            "high"
+            "medium"
           ]
         },
         "explore": {
           "off": [
             "luna",
-            "high"
+            "medium"
           ],
           "on": [
             "luna",
-            "high"
+            "medium"
           ],
           "low": [
             "luna",
-            "high"
+            "medium"
           ]
         },
         "subagent": {
           "off": [
             "luna",
-            "high"
+            "medium"
           ],
           "on": [
             "luna",
-            "high"
+            "medium"
           ],
           "low": [
             "luna",
-            "high"
+            "medium"
           ]
         },
         "title": {
@@ -297,28 +297,28 @@
         "memory": {
           "off": [
             "luna",
-            "high"
+            "medium"
           ],
           "pinned": true
         },
         "compaction": {
           "off": [
             "luna",
-            "high"
+            "medium"
           ],
           "pinned": true
         },
         "summary": {
           "off": [
             "luna",
-            "high"
+            "medium"
           ],
           "pinned": true
         },
         "transcribe": {
           "off": [
             "luna",
-            "high"
+            "medium"
           ],
           "pinned": true
         }
@@ -333,18 +333,12 @@
         "share": 1,
         "simple": "luna",
         "upper": "terra",
-        "weights": { "length": 0.1, "code": 0.3, "reasoning": 0.25, "technical": 0.25, "simple": 0.05, "multiStep": 0.03, "questions": 0.02 },
-        "tiers": [0.15, 0.35, 0.6],
-        "tokens": { "short": 15, "long": 400 },
-        "guards": { "followUpTokens": 15, "toolWorkFloor": true, "simpleNeedsEvidence": true },
         "classifier": {
-          "mode": "on",
-          "margin": 0.05,
           "timeoutMs": 1500,
           "card": "auto",
+          "threshold": 0.7,
           "decisions": { "provider": "openai", "apiModelId": "gpt-6-luna" }
-        },
-        "learner": { "mode": "on" }
+        }
       }
     },
     "zenith": {
@@ -484,7 +478,7 @@
         },
         "title": {
           "off": [
-            "terra",
+            "luna",
             "none"
           ],
           "pinned": true
@@ -498,7 +492,7 @@
         },
         "compaction": {
           "off": [
-            "terra",
+            "luna",
             "high"
           ],
           "pinned": true
@@ -528,18 +522,12 @@
         "share": 1,
         "simple": "sol",
         "upper": "astra",
-        "weights": { "length": 0.1, "code": 0.3, "reasoning": 0.25, "technical": 0.25, "simple": 0.05, "multiStep": 0.03, "questions": 0.02 },
-        "tiers": [0.15, 0.35, 0.6],
-        "tokens": { "short": 15, "long": 400 },
-        "guards": { "followUpTokens": 15, "toolWorkFloor": true, "simpleNeedsEvidence": true },
         "classifier": {
-          "mode": "on",
-          "margin": 0.05,
           "timeoutMs": 1500,
           "card": "zenith",
+          "threshold": 0.7,
           "decisions": { "provider": "openai", "apiModelId": "gpt-6-luna" }
-        },
-        "learner": { "mode": "on" }
+        }
       }
     }
   },
