@@ -147,6 +147,12 @@
     "floorCeilingTokens": 2000000,
     "newUserMultiplier": 2,
     "newUserDays": 7,
+    "monthly": {
+      "monthlyTokens": 10000000,
+      "newUserBonusTokens": 6000000,
+      "newUserBonusDays": 14,
+      "bonusSince": "2026-11-12T00:00:00Z"
+    },
     "releaseHours": 3,
     "requestPools": {
       "openrouter": {
