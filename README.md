@@ -48,7 +48,7 @@ See the [changelog](https://atlarix.dev/changelog) for the full history.
 | **[Cloud agent](https://atlarix.dev/cloud-agent)** | Ask from Slack or the web; Atlarix works in your repository's own GitHub Actions and opens a pull request | [atlarix.dev/cloud](https://atlarix.dev/cloud) · [the Action](https://github.com/AmariahAK/atlarix-agent-action) |
 | **[Atlarix Reviewer](https://atlarix.dev/reviewer)** | Reviews pull requests on GitHub; reads the diff, never runs your code | [atlarix.dev/reviewer](https://atlarix.dev/reviewer) |
 | **[Chrome extension](https://atlarix.dev/extension)** | Lets the agent open and test pages in your own browser | Chrome Web Store |
-| **[Editor extension](https://www.atlarix.dev/docs/guides/editors)** | The whole agent inside VS Code, Cursor, Kiro and Windsurf: any model or your own API key, every mode, edits in the editor's own diff | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=atlarix.atlarix) · [Open VSX](https://open-vsx.org/extension/atlarix/atlarix) |
+| **[Editor extension](https://www.atlarix.dev/vscode)** | The whole agent inside VS Code, Cursor, Kiro and Windsurf: any model or your own API key, every mode, edits in the editor's own diff | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=atlarix.atlarix) · [Open VSX](https://open-vsx.org/extension/atlarix/atlarix) |
 | **Zed and JetBrains IDEs** | The CLI as an Agent Client Protocol agent: `atlarix acp` | [setup](https://www.atlarix.dev/docs/guides/editors) |
 
 ### Install the CLI
