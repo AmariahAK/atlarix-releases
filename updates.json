@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "id": "15.17.0",
+      "title": "Auto picks the right model",
+      "body": "Auto and Zenith send each request to the model that fits it. Rix walks you through sign-in, CLI sessions share one sign-in, and hidden characters can't steer the model.",
+      "link": "https://atlarix.dev/blogs/atlarix-15-17-calmer-sign-in-auto-picks-the-model",
+      "linkLabel": "What's new"
+    },
+    {
       "id": "15.16.1",
       "title": "Make images",
       "body": "Ask the agent for an image and it makes or edits one, saved in your project. Paid chats use your balance to the last cent, and Auto and Zenith can use computer use.",
