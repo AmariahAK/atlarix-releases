@@ -7,7 +7,7 @@
  * in sync. There are two, in two different files:
  *
  *   CORE_MODELS   docs/CORE-MODELS.md    the public lineup — tier -> model id
- *   CORE_ROUTING  docs/CORE-CUTOVER.md   the operator view — slot -> provider, key
+ *   CORE_ROUTING  docs/CORE-CUTOVER.md   the operator view — slot -> provider
  *
  * The routing table is here because it was WRONG when it was hand-typed: it named
  * `openai/gpt-5.6-sol` for core-3 long after the JSON had moved to
@@ -80,7 +80,6 @@ function renderModels(cfg) {
 }
 
 function renderRouting(cfg) {
-  const providers = cfg.providers ?? {};
   const routing = cfg.routing ?? {};
   const rows = slots(cfg.models).map(([key, wireId]) => {
     const route = routing[key];
@@ -89,10 +88,9 @@ function renderRouting(cfg) {
     // core_unavailable. Rendering it blank is how someone finds that out here.
     const provider = route?.provider ?? "—";
     const apiModelId = route?.apiModelId ? `\`${route.apiModelId}\`` : "—";
-    const keyEnv = providers[route?.provider]?.apiKeyEnv;
-    return `| ${key} | \`${provider}\` | \`${wireId}\` | ${apiModelId} | ${keyEnv ? `\`${keyEnv}\`` : "—"} |`;
+    return `| ${key} | \`${provider}\` | \`${wireId}\` | ${apiModelId} |`;
   });
-  return table(["Slot", "Provider", "Wire id", "API model id", "Key"], rows);
+  return table(["Slot", "Provider", "Wire id", "API model id"], rows);
 }
 
 const TARGETS = [

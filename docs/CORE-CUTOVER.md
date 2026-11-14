@@ -48,14 +48,14 @@ proxy.
 ## The lineup
 
 <!-- CORE_ROUTING:START (auto-generated from core-models.json — do not edit by hand) -->
-| Slot | Provider | Wire id | API model id | Key |
-| --- | --- | --- | --- | --- |
-| core-1 | `openai` | `openai/gpt-6.1-terra` | `gpt-6.1-terra` | `OPENAI_API_KEY` |
-| core-2 | `anthropic` | `anthropic/claude-sonnet-5-5` | `claude-sonnet-5-5` | `ANTHROPIC_API_KEY` |
-| core-3 | `openai` | `openai/gpt-6.1-sol` | `gpt-6.1-sol` | `OPENAI_API_KEY` |
-| core-4 | `anthropic` | `anthropic/claude-opus-5-5` | `claude-opus-5-5` | `ANTHROPIC_API_KEY` |
-| core-5 | `openai` | `openai/gpt-6-astra` | `gpt-6-astra` | `OPENAI_API_KEY` |
-| core-6 | `anthropic` | `anthropic/claude-fable-5-2` | `claude-fable-5-2` | `ANTHROPIC_API_KEY` |
+| Slot | Provider | Wire id | API model id |
+| --- | --- | --- | --- |
+| core-1 | `openai` | `openai/gpt-6.1-terra` | `gpt-6.1-terra` |
+| core-2 | `anthropic` | `anthropic/claude-sonnet-5-5` | `claude-sonnet-5-5` |
+| core-3 | `openai` | `openai/gpt-6.1-sol` | `gpt-6.1-sol` |
+| core-4 | `anthropic` | `anthropic/claude-opus-5-5` | `claude-opus-5-5` |
+| core-5 | `openai` | `openai/gpt-6-astra` | `gpt-6-astra` |
+| core-6 | `anthropic` | `anthropic/claude-fable-5-2` | `claude-fable-5-2` |
 <!-- CORE_ROUTING:END -->
 
 The **API model id** column is what the provider is actually called with; the **wire id**

@@ -219,24 +219,12 @@ async function liveModelIds(provider) {
 }
 
 /**
- * The protocol a provider block should declare.
- *
- * READ FROM THE LIVE CONFIG, never hardcoded. This emitted `"protocol": "openai"`
- * unconditionally, so pasting the snippet over an existing block SILENTLY REVERTED the
- * `/v1/responses` cutover — the GPT tiers declare `openai-responses`, and dropping back
- * to `openai` takes away tool-use-with-reasoning without erroring anywhere.
+ * A snippet for the full config, which lives with the proxy; this repo's
+ * core-models.json is the public subset generated from it. No provider block is
+ * printed: the existing one there carries the protocol (pasting a default
+ * `"openai"` over `openai-responses` once reverted the /v1/responses cutover
+ * silently), and a new provider also needs a host entry in the proxy code.
  */
-function protocolFor(providerId) {
-  try {
-    const cfg = JSON.parse(readFileSync(CORE_MODELS_PATH, "utf8"));
-    const declared = cfg.providers?.[providerId]?.protocol;
-    if (typeof declared === "string" && declared) return declared;
-  } catch {
-    // No config yet, or unreadable — fall through to the plain default.
-  }
-  return "openai";
-}
-
 function configSnippet(providerId, provider, apiModelId, row) {
   const wireId = `${provider.openRouterVendor}/${apiModelId}`;
   // DeepSeek is the only one of the five with a documented cache-hit field today.
@@ -245,7 +233,7 @@ function configSnippet(providerId, provider, apiModelId, row) {
   return [
     `  "models":   { "core-N": "${wireId}" },`,
     `  "routing":  { "core-N": { "provider": "${providerId}", "apiModelId": "${apiModelId}", "cacheHitField": ${cacheHitField} } },`,
-    `  "providers": { "${providerId}": { "baseUrl": "${provider.baseUrl}", "apiKeyEnv": "${provider.apiKeyEnv}", "protocol": "${protocolFor(providerId)}", "balanceEndpoint": null } }`,
+    `  // providers["${providerId}"]: keep the existing block in the proxy's config`,
     row?.limit?.context
       ? `  // context ${fmtCtx(row.limit.context)} · in ${fmtUsd(row.cost?.input)} · out ${fmtUsd(row.cost?.output)} · reasoning ${reasoningSummary(row)}`
       : "",
@@ -399,13 +387,7 @@ function audit(catalog, openRouterIds) {
     } else {
       console.log(`  ✓ priced · ctx ${fmtCtx(row.limit?.context)} · ${reasoningSummary(row)}`);
     }
-    const declared = cfg.providers?.[route.provider];
-    if (!declared) {
-      console.log(`  ✗ no providers["${route.provider}"] block`);
-      problems++;
-    } else if (declared.apiKeyEnv !== provider.apiKeyEnv) {
-      console.log(`  ⚠ apiKeyEnv is "${declared.apiKeyEnv}"; expected "${provider.apiKeyEnv}"`);
-    }
+    // Provider blocks (hosts, key names) live with the proxy, not in this file.
   }
 
   console.log(problems === 0 ? "\nNo problems found." : `\n${problems} problem(s) found.`);

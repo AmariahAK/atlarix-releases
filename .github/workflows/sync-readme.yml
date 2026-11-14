@@ -66,8 +66,8 @@ jobs:
         run: node scripts/check-updates.mjs
 
   check-core-models:
-    # The gate this file was missing. `core-models.json` is read by the proxy on a
-    # 10-minute refresh loop, so an edit here goes LIVE to every installed client
+    # The gate this file was missing. `core-models.json` is read by installed
+    # clients, so an edit here goes LIVE to every installed client
     # with no build, no release and no review step — the same reasoning the
     # updates.json check is built on, with more at stake, because the failures are
     # silent: a model id that is absent from models.dev has no price row, so every
