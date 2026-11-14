@@ -6,7 +6,9 @@ name: Sync generated tables
 #   sync-site-lineup   — regenerate + push atlarix-launchpad's derived lineup
 #   sync               — regenerate the generated tables + the README catalogue counts
 #
-# core-models.json is the single source of truth; edit only the JSON.
+# core-models.json here is the PUBLIC copy that installed apps read. The source is
+# atlarix-proxy src/config/core-models.json: edit it there, run
+# `node scripts/public-core-models.mjs` in that repo, and copy the result here.
 #
 # The two CHECKS run on PULL REQUESTS; the sync cannot, because it rewrites a
 # file and can only be applied after a merge. That split is the whole point:
