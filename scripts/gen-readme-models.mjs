@@ -2,7 +2,8 @@
 /**
  * Regenerate every table in this repo that restates core-models.json.
  *
- * core-models.json is the single source of truth. This script renders each table
+ * core-models.json here is the public copy of atlarix-proxy's src/config/core-models.json
+ * (the source; edit it there and copy the generated public file here). This script renders each table
  * between a pair of HTML-comment markers, so editing only the JSON keeps the docs
  * in sync. There are two, in two different files:
  *

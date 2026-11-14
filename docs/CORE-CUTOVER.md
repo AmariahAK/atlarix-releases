@@ -3,8 +3,16 @@
 How to move an Atlarix Core tier from OpenRouter to its provider's own API, one tier
 at a time, with a one-line rollback.
 
-`core-models.json` is read live by **every installed client** (hourly) and by the proxy
-(every 10 min). Nothing here needs an app release or a proxy redeploy.
+The proxy reads **only** its own bundled `src/config/core-models.json` (atlarix-proxy); it no
+longer reads this repo. Installed clients read the public copy here (hourly). To change a tier:
+
+1. Edit `src/config/core-models.json` in an atlarix-proxy PR (dev → main; the deploy takes about two minutes).
+2. In that repo, run `node scripts/public-core-models.mjs`. It writes `public/core-models.json`, and a test fails on drift.
+3. Copy that file over `core-models.json` here in a PR. Check it with
+   `node scripts/public-core-models.mjs --check <this file>`.
+
+An edit made only here reaches the apps but not the proxy. Server-only fields (providers, gateway
+rungs, pools, mix, tuning) never come back into this file.
 
 ## Prerequisites (once)
 
