@@ -16,77 +16,30 @@
     "core-5": false,
     "core-6": false
   },
-  "providers": {
-    "openai": {
-      "baseUrl": "https://api.openai.com/v1",
-      "apiKeyEnv": "OPENAI_API_KEY",
-      "protocol": "openai-responses",
-      "balanceEndpoint": null
-    },
-    "openai-shared": {
-      "baseUrl": "https://api.openai.com/v1",
-      "apiKeyEnv": "OPENAI_SHARED_API_KEY",
-      "protocol": "openai-responses",
-      "balanceEndpoint": null
-    },
-    "openrouter-free": {
-      "baseUrl": "https://openrouter.ai/api/v1",
-      "apiKeyEnv": "OPENROUTER_FREE_API_KEY",
-      "protocol": "openai",
-      "balanceEndpoint": null
-    },
-    "requesty-free": {
-      "baseUrl": "https://router.requesty.ai/v1",
-      "apiKeyEnv": "REQUESTY_API_KEY",
-      "protocol": "openai",
-      "balanceEndpoint": null
-    },
-    "zai": {
-      "baseUrl": "https://api.z.ai/api/paas/v4",
-      "apiKeyEnv": "ZHIPU_API_KEY",
-      "protocol": "openai",
-      "balanceEndpoint": null
-    },
-    "anthropic": {
-      "baseUrl": "https://api.anthropic.com",
-      "apiKeyEnv": "ANTHROPIC_API_KEY",
-      "protocol": "anthropic",
-      "balanceEndpoint": null
-    }
-  },
   "routing": {
     "core-1": {
       "provider": "openai",
-      "apiModelId": "gpt-6.1-terra",
-      "cacheHitField": "input_tokens_details.cached_tokens"
+      "apiModelId": "gpt-6.1-terra"
     },
     "core-2": {
       "provider": "anthropic",
-      "apiModelId": "claude-sonnet-5-5",
-      "cacheHitField": "cache_read_input_tokens",
-      "cacheWriteField": "cache_creation_input_tokens"
+      "apiModelId": "claude-sonnet-5-5"
     },
     "core-3": {
       "provider": "openai",
-      "apiModelId": "gpt-6.1-sol",
-      "cacheHitField": "input_tokens_details.cached_tokens"
+      "apiModelId": "gpt-6.1-sol"
     },
     "core-4": {
       "provider": "anthropic",
-      "apiModelId": "claude-opus-5-5",
-      "cacheHitField": "cache_read_input_tokens",
-      "cacheWriteField": "cache_creation_input_tokens"
+      "apiModelId": "claude-opus-5-5"
     },
     "core-5": {
       "provider": "openai",
-      "apiModelId": "gpt-6-astra",
-      "cacheHitField": "input_tokens_details.cached_tokens"
+      "apiModelId": "gpt-6-astra"
     },
     "core-6": {
       "provider": "anthropic",
-      "apiModelId": "claude-fable-5-2",
-      "cacheHitField": "cache_read_input_tokens",
-      "cacheWriteField": "cache_creation_input_tokens"
+      "apiModelId": "claude-fable-5-2"
     }
   },
   "auto": {
@@ -105,81 +58,12 @@
         "pool": "mini"
       },
       {
-        "provider": "openrouter-free",
-        "apiModelId": "openrouter/free",
-        "pool": "openrouter",
-        "pinServed": true
-      },
-      {
-        "provider": "requesty-free",
-        "apiModelId": "discover",
-        "pool": "requesty",
-        "discover": true
-      },
-      {
         "provider": "openai-shared",
         "apiModelId": "gpt-5.4",
-        "pool": "large",
-        "noTools": true
-      },
-      {
-        "provider": "zai",
-        "apiModelId": "glm-4.7-flash",
-        "pool": "floor",
-        "concurrency": 1,
-        "textOnly": true
+        "pool": "large"
       }
     ],
-    "pools": {
-      "mini": {
-        "tier12": 2500000,
-        "tier35": 10000000
-      },
-      "large": {
-        "tier12": 250000,
-        "tier35": 1000000
-      }
-    },
-    "usageTier": 3,
-    "cutoff": 0.9,
-    "floorTokens": 50000,
-    "ceilingTokens": 600000,
-    "floorCeilingTokens": 2000000,
-    "newUserMultiplier": 2,
-    "newUserDays": 7,
-    "monthly": {
-      "monthlyTokens": 10000000,
-      "newUserBonusTokens": 6000000,
-      "newUserBonusDays": 14,
-      "bonusSince": "2026-11-12T00:00:00Z"
-    },
-    "releaseHours": 3,
-    "requestPools": {
-      "openrouter": {
-        "perDay": 1000,
-        "perMinute": 20
-      },
-      "requesty": {
-        "perDay": 200,
-        "perMinute": 20
-      }
-    },
-    "mix": [
-      "mini",
-      "openrouter",
-      "requesty"
-    ],
-    "requestShare": {
-      "floor": 40,
-      "ceiling": 240
-    },
     "paid": {
-      "mode": "on",
-      "shadowTier": "core-2",
-      "order": [
-        "luna",
-        "terra"
-      ],
       "levels": {
         "luna": [
           {
@@ -201,155 +85,11 @@
             "apiModelId": "claude-sonnet-5-5"
           }
         ]
-      },
-      "lanes": {
-        "build": {
-          "off": [
-            "terra",
-            "medium"
-          ],
-          "on": [
-            "terra",
-            "medium"
-          ],
-          "low": [
-            "terra",
-            "medium"
-          ]
-        },
-        "debug": {
-          "off": [
-            "terra",
-            "medium"
-          ],
-          "on": [
-            "terra",
-            "medium"
-          ],
-          "low": [
-            "terra",
-            "medium"
-          ]
-        },
-        "plan": {
-          "off": [
-            "terra",
-            "medium"
-          ],
-          "on": [
-            "terra",
-            "medium"
-          ],
-          "low": [
-            "terra",
-            "medium"
-          ]
-        },
-        "review": {
-          "off": [
-            "terra",
-            "medium"
-          ],
-          "on": [
-            "terra",
-            "medium"
-          ],
-          "low": [
-            "terra",
-            "medium"
-          ]
-        },
-        "explore": {
-          "off": [
-            "luna",
-            "medium"
-          ],
-          "on": [
-            "luna",
-            "medium"
-          ],
-          "low": [
-            "luna",
-            "medium"
-          ]
-        },
-        "subagent": {
-          "off": [
-            "luna",
-            "medium"
-          ],
-          "on": [
-            "luna",
-            "medium"
-          ],
-          "low": [
-            "luna",
-            "medium"
-          ]
-        },
-        "title": {
-          "off": [
-            "luna",
-            "none"
-          ],
-          "pinned": true
-        },
-        "memory": {
-          "off": [
-            "luna",
-            "medium"
-          ],
-          "pinned": true
-        },
-        "compaction": {
-          "off": [
-            "luna",
-            "medium"
-          ],
-          "pinned": true
-        },
-        "summary": {
-          "off": [
-            "luna",
-            "medium"
-          ],
-          "pinned": true
-        },
-        "transcribe": {
-          "off": [
-            "luna",
-            "medium"
-          ],
-          "pinned": true
-        }
-      },
-      "ladder": {
-        "altProvider": "anthropic",
-        "altShare": 0.25,
-        "qualityFailures": 2,
-        "stepUp": false
-      },
-      "complexity": {
-        "mode": "on",
-        "share": 1,
-        "simple": "luna",
-        "upper": "terra",
-        "classifier": {
-          "timeoutMs": 1500,
-          "card": "auto",
-          "threshold": 0.7,
-          "decisions": { "provider": "openai", "apiModelId": "gpt-6-luna" }
-        }
       }
     },
     "zenith": {
       "id": "atlarix/zenith",
       "label": "Atlarix Zenith",
-      "mode": "on",
-      "order": [
-        "sol",
-        "astra"
-      ],
       "levels": {
         "luna": [
           {
@@ -391,145 +131,6 @@
             "apiModelId": "claude-fable-5-2"
           }
         ]
-      },
-      "lanes": {
-        "build": {
-          "off": [
-            "sol",
-            "high"
-          ],
-          "on": [
-            "sol",
-            "high"
-          ],
-          "low": [
-            "sol",
-            "high"
-          ]
-        },
-        "debug": {
-          "off": [
-            "sol",
-            "high"
-          ],
-          "on": [
-            "sol",
-            "high"
-          ],
-          "low": [
-            "sol",
-            "high"
-          ]
-        },
-        "explore": {
-          "off": [
-            "sol",
-            "high"
-          ],
-          "on": [
-            "sol",
-            "high"
-          ],
-          "low": [
-            "sol",
-            "high"
-          ]
-        },
-        "plan": {
-          "off": [
-            "astra",
-            "high"
-          ],
-          "on": [
-            "astra",
-            "high"
-          ],
-          "low": [
-            "astra",
-            "high"
-          ]
-        },
-        "review": {
-          "off": [
-            "astra",
-            "high"
-          ],
-          "on": [
-            "astra",
-            "high"
-          ],
-          "low": [
-            "astra",
-            "high"
-          ]
-        },
-        "subagent": {
-          "off": [
-            "terra",
-            "high"
-          ],
-          "on": [
-            "terra",
-            "high"
-          ],
-          "low": [
-            "terra",
-            "high"
-          ]
-        },
-        "title": {
-          "off": [
-            "luna",
-            "none"
-          ],
-          "pinned": true
-        },
-        "memory": {
-          "off": [
-            "luna",
-            "high"
-          ],
-          "pinned": true
-        },
-        "compaction": {
-          "off": [
-            "luna",
-            "high"
-          ],
-          "pinned": true
-        },
-        "summary": {
-          "off": [
-            "luna",
-            "high"
-          ],
-          "pinned": true
-        },
-        "transcribe": {
-          "off": [
-            "luna",
-            "high"
-          ],
-          "pinned": true
-        }
-      },
-      "ladder": {
-        "altProvider": "anthropic",
-        "altShare": 0.25,
-        "qualityFailures": 2,
-        "stepUp": false
-      },
-      "complexity": {
-        "mode": "on",
-        "share": 1,
-        "simple": "sol",
-        "upper": "astra",
-        "classifier": {
-          "timeoutMs": 1500,
-          "card": "zenith",
-          "threshold": 0.7,
-          "decisions": { "provider": "openai", "apiModelId": "gpt-6-luna" }
-        }
       }
     }
   },
