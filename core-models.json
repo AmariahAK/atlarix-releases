@@ -326,7 +326,8 @@
       "ladder": {
         "altProvider": "anthropic",
         "altShare": 0.25,
-        "qualityFailures": 2
+        "qualityFailures": 2,
+        "stepUp": false
       },
       "complexity": {
         "mode": "on",
@@ -515,7 +516,8 @@
       "ladder": {
         "altProvider": "anthropic",
         "altShare": 0.25,
-        "qualityFailures": 2
+        "qualityFailures": 2,
+        "stepUp": false
       },
       "complexity": {
         "mode": "on",
