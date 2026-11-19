@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "models": {
+    "core-1": "openai/gpt-6.1-terra",
+    "core-2": "anthropic/claude-sonnet-5-5",
+    "core-3": "openai/gpt-6.1-sol",
+    "core-4": "anthropic/claude-opus-5-5",
+    "core-5": "openai/gpt-6-astra",
+    "core-6": "anthropic/claude-fable-5-2"
+  },
+  "webSearch": {
+    "core-1": false,
+    "core-2": false,
+    "core-3": false,
+    "core-4": false,
+    "core-5": false,
+    "core-6": false
+  },
+  "routing": {
+    "core-1": {
+      "provider": "openai",
+      "apiModelId": "gpt-6.1-terra"
+    },
+    "core-2": {
+      "provider": "anthropic",
+      "apiModelId": "claude-sonnet-5-5"
+    },
+    "core-3": {
+      "provider": "openai",
+      "apiModelId": "gpt-6.1-sol"
+    },
+    "core-4": {
+      "provider": "anthropic",
+      "apiModelId": "claude-opus-5-5"
+    },
+    "core-5": {
+      "provider": "openai",
+      "apiModelId": "gpt-6-astra"
+    },
+    "core-6": {
+      "provider": "anthropic",
+      "apiModelId": "claude-fable-5-2"
+    }
+  },
+  "auto": {
+    "id": "atlarix/auto",
+    "label": "Atlarix Auto",
+    "freeWorkingWindowTokens": 200000,
+    "chain": [
+      {
+        "provider": "openai-shared",
+        "apiModelId": "gpt-5.4-mini",
+        "pool": "mini"
+      },
+      {
+        "provider": "openai-shared",
+        "apiModelId": "gpt-5-mini",
+        "pool": "mini"
+      },
+      {
+        "provider": "openai-shared",
+        "apiModelId": "gpt-5.4",
+        "pool": "large"
+      }
+    ],
+    "paid": {
+      "levels": {
+        "luna": [
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6-luna"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-haiku-5-5"
+          }
+        ],
+        "terra": [
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6.1-terra"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-sonnet-5-5"
+          }
+        ]
+      }
+    },
+    "zenith": {
+      "id": "atlarix/zenith",
+      "label": "Atlarix Zenith",
+      "levels": {
+        "luna": [
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6-luna"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-haiku-5-5"
+          }
+        ],
+        "terra": [
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6.1-terra"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-sonnet-5-5"
+          }
+        ],
+        "sol": [
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6.1-sol"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-opus-5-5"
+          }
+        ],
+        "astra": [
+          {
+            "provider": "openai",
+            "apiModelId": "gpt-6-astra"
+          },
+          {
+            "provider": "anthropic",
+            "apiModelId": "claude-fable-5-2"
+          }
+        ]
+      }
+    }
+  },
+  "modelEfforts": {
+    "gpt-6.1-sol": [
+      "low",
+      "medium",
+      "high",
+      "xhigh",
+      "max"
+    ]
+  },
+  "proxy": {
+    "fallbackUrl": "https://failover.atlarix.dev"
+  }
+}

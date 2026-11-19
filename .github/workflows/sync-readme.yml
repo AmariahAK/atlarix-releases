@@ -1,0 +1,66 @@
+name: Sync site lineup
+
+# After core-models.json lands on main, regenerate atlarix-launchpad's derived
+# lineup (the Cloud page's model menu reads it) and push; the push is what
+# redeploys the site (Vercel's git integration, not Actions — so the launchpad
+# being private costs no Actions minutes).
+#
+# Authenticates with a DEPLOY KEY scoped to atlarix-launchpad alone
+# (secret LAUNCHPAD_DEPLOY_KEY) — write access to one repo, nothing else.
+# Commits only the one generated file, so it cannot push anything else.
+# Without the secret it skips cleanly.
+#
+# core-models.json here is the PUBLIC copy that installed apps read. The source
+# is atlarix-proxy src/config/core-models.json: edit it there, run
+# `node scripts/public-core-models.mjs` in that repo, and copy the result here.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "core-models.json"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: sync-site-lineup-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sync-site-lineup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Deploy key present?
+        id: key
+        env:
+          KEY: ${{ secrets.LAUNCHPAD_DEPLOY_KEY }}
+        run: |
+          if [[ -n "$KEY" ]]; then echo "ok=true" >> "$GITHUB_OUTPUT"; else echo "::warning::LAUNCHPAD_DEPLOY_KEY is not set — the site lineup will not auto-sync."; fi
+      - uses: actions/checkout@v4
+        if: steps.key.outputs.ok == 'true'
+        with:
+          repository: AmariahAK/atlarix-launchpad
+          ssh-key: ${{ secrets.LAUNCHPAD_DEPLOY_KEY }}
+          path: launchpad
+      - uses: actions/setup-node@v4
+        if: steps.key.outputs.ok == 'true'
+        with:
+          node-version: "20"
+      - name: Regenerate the site's Core lineup and push if it changed
+        if: steps.key.outputs.ok == 'true'
+        working-directory: launchpad
+        run: |
+          node scripts/gen-core-lineup.mjs
+          FILE=src/data/core-lineup.generated.json
+          if [[ -n "$(git status --porcelain -- "$FILE")" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -- "$FILE"
+            git commit -m "chore: refresh Core lineup from core-models.json"
+            git push
+          else
+            echo "Site lineup already in sync."
+          fi

@@ -1,0 +1,117 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "15.18.1",
+      "title": "Atlarix builds its own tools for you",
+      "body": "Ask for a panel, a command or a rule and Atlarix writes it as a silk. Plus fewer interruptions, three modes, /export and delete account.",
+      "link": "https://www.atlarix.dev/blogs/atlarix-15-18-atlarix-writes-its-own-silks-and-mods",
+      "linkLabel": "What's new"
+    },
+    {
+      "id": "15.17.0",
+      "title": "Auto picks the right model",
+      "body": "Auto and Zenith send each request to the model that fits it. Rix walks you through sign-in, CLI sessions share one sign-in, and hidden characters can't steer the model.",
+      "link": "https://atlarix.dev/blogs/atlarix-15-17-calmer-sign-in-auto-picks-the-model",
+      "linkLabel": "What's new"
+    },
+    {
+      "id": "15.16.1",
+      "title": "Make images",
+      "body": "Ask the agent for an image and it makes or edits one, saved in your project. Paid chats use your balance to the last cent, and Auto and Zenith can use computer use.",
+      "link": "https://atlarix.dev/blogs/atlarix-15-16-make-images-ai-coding-agent",
+      "linkLabel": "What's new"
+    },
+    {
+      "id": "15.15.2",
+      "title": "Slack in Atlarix",
+      "body": "Pick Slack in the MCP list and press Connect. The agent can read channels and threads, search and post as you, in the app, the CLI and your editor.",
+      "link": "https://atlarix.dev/blogs/atlarix-15-15-connect-slack-ai-coding-agent",
+      "linkLabel": "What's new"
+    },
+    {
+      "id": "15.14.0",
+      "title": "Free Auto just works",
+      "body": "Free Atlarix Auto runs your first message with no key and no question. Sub-agents finish their part, the chat keeps up with long answers, and in the CLI you can click to edit.",
+      "link": "https://atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
+      "id": "15.13.3",
+      "title": "Sessions that review each other",
+      "body": "Sessions see each other's messages where they land and review each other's requests. Questions come with described, multi-pick options. In the CLI, ctrl+s sends what you queued now.",
+      "link": "https://atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
+      "id": "15.12.3",
+      "title": "Sessions that talk to each other",
+      "body": "Fork a session, send it a task, set its mode and model, review its plan, and get notified when it finishes. Cross-session messaging works across the app, CLI, VS Code and any ACP editor.",
+      "link": "https://atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
+      "id": "15.5.0",
+      "title": "Your keys and MCP servers, everywhere",
+      "body": "Every API key is checked with its provider, and MCP servers from Claude Code, Cursor or VS Code are found with an Add button. The editor extension is redesigned.",
+      "link": "https://atlarix.dev/docs/guides/editors",
+      "linkLabel": "See what's new"
+    },
+    {
+      "id": "15.4.0",
+      "title": "Atlarix in VS Code, Cursor, Kiro and Windsurf",
+      "body": "Install the Atlarix extension and the whole agent runs in your editor: every mode, your models and keys, and edits you approve in the editor's own diff.",
+      "link": "https://atlarix.dev/docs/guides/editors",
+      "linkLabel": "Set it up"
+    },
+    {
+      "id": "15.3.0",
+      "title": "Atlarix in your editor",
+      "body": "Use Atlarix inside Zed, JetBrains IDEs and VS Code: point your editor at `atlarix acp`. Edits and commands still wait for your OK.",
+      "link": "https://atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
+      "id": "15.2.0",
+      "title": "Hand a browser task to Chrome",
+      "body": "Your terminal or app session can now send the Atlarix Chrome extension a job; click its icon to start it and steer it as it works. New accounts get double the free allowance in week one.",
+      "link": "https://www.atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
+      "id": "14.45.0",
+      "title": "The app is free, and skills live in your repo",
+      "body": "Every feature is on every plan; Atlarix Core inference is what's metered. Skills are now markdown files in your project's .atlarix/skills/, and a cancelled turn bills only what it produced.",
+      "link": "https://www.atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
+      "id": "14.42.0",
+      "title": "Talk to Atlarix while it is working",
+      "body": "A message you type mid-turn now reaches the turn that is running, instead of waiting for it to end. Type as many as you like — each one is cancellable until it is picked up.",
+      "link": "https://www.atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
+      "id": "14.38.3",
+      "title": "Atlarix Core 1 is now GLM 5.3",
+      "body": "Core 1 moved to GLM 5.3 — same 1M context, same price, and deep thinking scales to what the model supports. Nothing to install; it is already live.",
+      "link": "https://www.atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
+      "id": "14.38.2",
+      "title": "Your plan updates when you come back",
+      "body": "Upgrading happens in a browser, so Atlarix now re-checks your plan every time you return to the window instead of only after it had been idle.",
+      "link": "https://www.atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
+      "id": "14.38.1",
+      "title": "A usage bar that reads as a percentage",
+      "body": "Settings shows how much of this month's included usage you have spent, and leads with the credit you bought. Your account page now separates Atlarix from Atlarix Reviewer.",
+      "link": "https://www.atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    }
+  ]
+}
