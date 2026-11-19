@@ -1,18 +1,6 @@
 name: Sync site lineup
 
-# After core-models.json lands on main, regenerate atlarix-launchpad's derived
-# lineup (the Cloud page's model menu reads it) and push; the push is what
-# redeploys the site (Vercel's git integration, not Actions — so the launchpad
-# being private costs no Actions minutes).
-#
-# Authenticates with a DEPLOY KEY scoped to atlarix-launchpad alone
-# (secret LAUNCHPAD_DEPLOY_KEY) — write access to one repo, nothing else.
-# Commits only the one generated file, so it cannot push anything else.
-# Without the secret it skips cleanly.
-#
-# core-models.json here is the PUBLIC copy that installed apps read. The source
-# is atlarix-proxy src/config/core-models.json: edit it there, run
-# `node scripts/public-core-models.mjs` in that repo, and copy the result here.
+# Keeps the website's model list in step with core-models.json.
 
 on:
   push:
