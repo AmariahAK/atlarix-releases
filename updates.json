@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "id": "15.19.1",
+      "title": "Connect MCP servers in one click",
+      "body": "One-click MCP sign-in, Reconnect mid-task, and mods with themes and bands.",
+      "link": "https://www.atlarix.dev/blogs/connect-mcp-servers-in-one-click",
+      "linkLabel": "What's new"
+    },
+    {
       "id": "15.18.1",
       "title": "Atlarix builds its own tools for you",
       "body": "Ask for a panel, a command or a rule and Atlarix writes it as a silk. Plus fewer interruptions, three modes, /export and delete account.",
