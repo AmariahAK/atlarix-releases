@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "id": "15.19.2",
+      "title": "Clear errors when your local model is off",
+      "body": "Atlarix tells you at once when Ollama or another local server isn't running, and how to start it. Filling rich-text editors in the browser works now.",
+      "link": "https://www.atlarix.dev/changelog",
+      "linkLabel": "What's new"
+    },
+    {
       "id": "15.19.1",
       "title": "Connect MCP servers in one click",
       "body": "One-click MCP sign-in, Reconnect mid-task, and mods with themes and bands.",
