@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "id": "15.19.5",
+      "title": "Long replies that don't freeze",
+      "body": "Long replies stream without freezing, and keep going while they add something new. A retired model, a rate limit or a refusal now gets one clear message.",
+      "link": "https://www.atlarix.dev/blogs/atlarix-15-19-5-long-replies-clearer-provider-errors",
+      "linkLabel": "What's new"
+    },
+    {
       "id": "15.19.2",
       "title": "Clear errors when your local model is off",
       "body": "Atlarix tells you at once when Ollama or another local server isn't running, and how to start it. Filling rich-text editors in the browser works now.",
