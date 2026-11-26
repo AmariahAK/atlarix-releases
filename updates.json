@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "id": "15.20.0",
+      "title": "Two modes, and edits without cards",
+      "body": "Build and Plan replace the three modes. File edits inside your project apply without a card, and Revert still undoes them. The CLI now installs with apt, dnf, pip, Docker and Scoop.",
+      "link": "https://www.atlarix.dev/blogs/atlarix-15-20-0-two-modes-edits-without-cards",
+      "linkLabel": "What's new"
+    },
+    {
       "id": "15.19.5",
       "title": "Long replies that don't freeze",
       "body": "Long replies stream without freezing, and keep going while they add something new. A retired model, a rate limit or a refusal now gets one clear message.",
